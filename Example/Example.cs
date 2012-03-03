@@ -28,24 +28,37 @@ namespace Example
 				running = false;
 			};
 
-			example = new TextDisplay(132, 60);
+			example = new TextDisplay(Width, Height);
 
 			r = new Random();
 		}
 
 		public void Run()
 		{
+			double t = 0;
+
 			while (running)
 			{
 				window.DispatchEvents();
 				window.Clear(Color.White);
 				example.Clear(Character.Create(0, 0, 0));
 
-
+				int o = (int)(Math.Sin(t) * 10);
+				Rectangle(20 + o, 20 + o, 60 - o, 40 - o);
+				Rectangle(70 - o, 20 - o, 110 + o, 40 + o);
 
 				example.Draw(window, new Vector2f(0, 0));
 				window.Display();
+
+				t += 0.35;
 			}
 		}
+
+		void Rectangle(int x1, int y1, int x2, int y2)
+		{
+			for (int y = y1; y < y2; y++)
+				for (int x = x1; x < x2; x++)
+					example.Set(x, y, Character.Create((byte)'@', (byte)r.Next(15), 0));
+		} 
 	}
 }
