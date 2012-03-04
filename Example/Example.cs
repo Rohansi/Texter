@@ -47,6 +47,10 @@ namespace Example
 				Rectangle(20 + o, 20 + o, 60 - o, 40 - o);
 				Rectangle(70 - o, 20 - o, 110 + o, 40 + o);
 
+				Rectangle(41, 20, 89, 40);
+
+				example.DrawString(2, 2, "Hello, world!");
+
 				example.Draw(window, new Vector2f(0, 0));
 				window.Display();
 
@@ -58,7 +62,7 @@ namespace Example
 		{
 			for (int y = y1; y < y2; y++)
 				for (int x = x1; x < x2; x++)
-					example.Set(x, y, Character.Create((byte)'@', (byte)r.Next(15), 0));
-		} 
+					example.Set(x, y, Character.Create((byte)r.Next(32, 126), (byte)r.Next(15), 0));
+		}
 	}
 }
