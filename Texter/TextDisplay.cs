@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using SFML.Window;
 using SFML.Graphics;
 
@@ -6,13 +7,15 @@ namespace Texter
 {
 	public class TextDisplay : TextRenderer
 	{
+		public static string DataFolder = "Data/Texter/";
+
 		public const int CharacterWidth	= 6;
 		public const int CharacterHeight = 8;
 
-		static Image palette = new Image("Data/palette.png");
+		static Image palette = new Image(Path.Combine(DataFolder, "palette.png"));
 		static Texture paletteTexture = new Texture(palette);
 
-		static Texture fontTexture = new Texture("Data/font.png");
+		static Texture fontTexture = new Texture(Path.Combine(DataFolder, "font.png"));
 
 		Image data;
 		Texture dataTexture;
@@ -32,7 +35,7 @@ namespace Texter
 
 			display = new RenderTexture((uint)width * CharacterWidth, (uint)height * CharacterHeight);
 
-			renderer = new Shader("Data/textrenderer.sfx");
+			renderer = new Shader(Path.Combine(DataFolder, "textrenderer.sfx"));
 			renderer.SetTexture("data", dataTexture);
 			renderer.SetParameter("dataSize", width, height);
 			renderer.SetTexture("font", fontTexture);

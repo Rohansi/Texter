@@ -51,17 +51,17 @@
     <Compile Include="TextRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\font.png">
+    <Content Include="Data\Texter\font.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\textrenderer.sfx">
+    <Content Include="Data\Texter\textrenderer.sfx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\palette.png">
+    <Content Include="Data\Texter\palette.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
