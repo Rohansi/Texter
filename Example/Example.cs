@@ -50,7 +50,7 @@ namespace Example
 				Rectangle(41, 20, 89, 40);
 
 				example.DrawString(2, 2, "Hello, world!");
-
+				
 				example.Draw(window, new Vector2f(0, 0));
 				window.Display();
 
