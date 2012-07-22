@@ -43,26 +43,41 @@ namespace Example
 				window.Clear(Color.White);
 				example.Clear(Character.Create(0, 0, 0));
 
-				int o = (int)(Math.Sin(t) * 10);
-				Rectangle(20 + o, 20 + o, 60 - o, 40 - o);
-				Rectangle(70 - o, 20 - o, 110 + o, 40 + o);
+				for (int y = 0; y < Height; y++)
+				{
+					for (int x = 0; x < Width; x++)
+					{
+						double x0 = (((double)x / Width) * 3.5) - 2.5;
+						double y0 = (((double)y / Height) * 2.0) - 1;
 
-				Rectangle(41, 20, 89, 40);
+						// zooming
+						x0 /= 1 + Math.Sin(t) * 1;
+						y0 /= 1 + Math.Sin(t) * 1;
 
-				example.DrawString(2, 2, "Hello, world!");
-				
+						double xx = 0;
+						double yy = 0;
+
+						int iteration = 0;
+						int maxIteration = 24;
+
+						while (xx * xx + yy * yy < 2 * 2 && iteration < maxIteration)
+						{
+							double xtemp = xx * xx - yy * yy + x0;
+							yy = 2 * xx * yy + y0;
+							xx = xtemp;
+
+							iteration++;
+						}
+
+						example.Set(x, y, Character.Create(32, 0, (byte)(((double)iteration / maxIteration) * 255)));
+					}
+				}
+
 				example.Draw(window, new Vector2f(0, 0));
 				window.Display();
 
-				t += 0.35;
+				t += 0.1;
 			}
-		}
-
-		void Rectangle(int x1, int y1, int x2, int y2)
-		{
-			for (int y = y1; y < y2; y++)
-				for (int x = x1; x < x2; x++)
-					example.Set(x, y, Character.Create((byte)r.Next(32, 126), (byte)r.Next(15), 0));
 		}
 	}
 }
