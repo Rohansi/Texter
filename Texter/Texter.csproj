@@ -51,8 +51,8 @@
     <Compile Include="TextRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\font.png" />
-    <Content Include="Data\palette.png" />
+    <Content Include="Data\Font.png" />
+    <Content Include="Data\Palette.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

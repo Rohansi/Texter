@@ -18,8 +18,7 @@ namespace Example
 
 		public Example()
 		{
-			window = new RenderWindow(new VideoMode(Width * TextDisplay.CharacterWidth,
-				Height * TextDisplay.CharacterHeight), "", Styles.Close);
+			window = new RenderWindow(new VideoMode(Width * 6, Height * 8), "", Styles.Close);
 
 			window.SetFramerateLimit(30);
 

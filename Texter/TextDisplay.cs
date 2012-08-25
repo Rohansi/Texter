@@ -18,7 +18,7 @@ void main() {
 #version 130
 #extension GL_EXT_gpu_shader4 : enable
 
-const ivec2 charSize	= ivec2(6, 8);
+const ivec2 charSize	= ivec2(#W#, #H#);
 const ivec2 fontSizeC	= ivec2(16, 16);
 const ivec2 fontSize	= ivec2(charSize.x * fontSizeC.x, charSize.y * fontSizeC.y);
 
@@ -60,13 +60,10 @@ void main() {
 
 		public static string DataFolder = "Data/";
 
-		public const int CharacterWidth	= 6;
-		public const int CharacterHeight = 8;
-
-		static Image palette = new Image(Path.Combine(DataFolder, "palette.png"));
+		static Image palette = new Image(Path.Combine(DataFolder, "Palette.png"));
 		static Texture paletteTexture = new Texture(palette);
 
-		static Texture fontTexture = new Texture(Path.Combine(DataFolder, "font.png"));
+		static Texture fontTexture = new Texture(Path.Combine(DataFolder, "Font.png"));
 
 		Image data;
 		Texture dataTexture;
@@ -76,7 +73,7 @@ void main() {
 
 		Color color = new Color(0, 15, 0);
 
-		public TextDisplay(int width, int height)
+		public TextDisplay(int width, int height, uint charWidth = 6, uint charHeight = 8)
 		{
 			Width = width;
 			Height = height;
@@ -84,9 +81,13 @@ void main() {
 			data = new Image((uint)width, (uint)height, Color.Black);
 			dataTexture = new Texture(data);
 
-			display = new RenderTexture((uint)width * CharacterWidth, (uint)height * CharacterHeight);
+			display = new RenderTexture((uint)width * charWidth, (uint)height * charHeight);
 
-			renderer = Shader.FromString(DisplayVertexShader, DisplayFragmentShader);
+			string shader = DisplayFragmentShader
+				.Replace("#W#", charWidth.ToString())
+				.Replace("#H#", charHeight.ToString());
+
+			renderer = Shader.FromString(DisplayVertexShader, shader);
 			renderer.SetParameter("data", dataTexture);
 			renderer.SetParameter("dataSize", width, height);
 			renderer.SetParameter("font", fontTexture);
@@ -126,6 +127,14 @@ void main() {
 			color.G = c.Fore;
 			color.B = c.Back;
 			data.SetPixel((uint)x, (uint)y, color);
+		}
+
+		public override Character Get(int x, int y)
+		{
+			if (x < 0 || x >= Width || y < 0 || y >= Height)
+				return Character.Create(0, 0, 0);
+			Color p = data.GetPixel((uint)x, (uint)y);
+			return Character.Create(p.R, p.G, p.B);
 		}
 
 		public override void DrawString(int x, int y, string str, byte fore = 15, byte back = 0)

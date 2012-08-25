@@ -21,14 +21,6 @@ namespace Texter
 			}
 		}
 
-		public Character Get(int x, int y)
-		{
-			if (x < 0 || x > Width || y < 0 || y > Height)
-				throw new ArgumentOutOfRangeException();
-
-			return data[x, y];
-		}
-
 		public override void Clear(Character c)
 		{
 			for (uint y = 0; y < Height; y++)
@@ -46,6 +38,14 @@ namespace Texter
 				return;
 
 			data[x, y] = c;
+		}
+
+		public override Character Get(int x, int y)
+		{
+			if (x < 0 || x > Width || y < 0 || y > Height)
+				throw new ArgumentOutOfRangeException();
+
+			return data[x, y];
 		}
 
 		public override void DrawString(int x, int y, string str, byte fore = 15, byte back = 0)
