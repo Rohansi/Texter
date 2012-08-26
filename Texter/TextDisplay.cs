@@ -141,6 +141,13 @@ void main() {
 		{
 			foreach (char c in str)
 			{
+				if (c == '\n')
+				{
+					x = 0;
+					y++;
+					continue;
+				}
+
 				Set(x, y, Character.Create((byte)c, fore, back));
 				x++;
 			}
