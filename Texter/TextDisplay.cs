@@ -15,50 +15,31 @@ namespace Texter
 
 		Color color = new Color(0, 0, 0);
 
-		public TextDisplay(int width, int height, uint characterWidth = DefaultCharacterWidth, uint characterHeight = DefaultCharacterHeight)
+		public TextDisplay(uint width, uint height)
 		{
 			Width = width;
 			Height = height;
 
-			data = new Image((uint)width, (uint)height, Color.Black);
+			data = new Image(width, height, Color.Black);
 			dataTexture = new Texture(data);
 
-			display = new RenderTexture((uint)width * characterWidth, (uint)height * characterHeight);
+			display = new RenderTexture((uint)width * CharacterWidth, (uint)height * CharacterHeight);
 
-			string shader = DisplayFragmentShader
-				.Replace("#W#", characterWidth.ToString())
-				.Replace("#H#", characterHeight.ToString());
-
-			renderer = Shader.FromString(DisplayVertexShader, shader);
+			renderer = Shader.FromString(DisplayVertexShader, DisplayFragmentShader);
 			renderer.SetParameter("data", dataTexture);
 			renderer.SetParameter("dataSize", width, height);
 			renderer.SetParameter("font", FontTexture);
 			renderer.SetParameter("palette", PaletteTexture);
 		}
 
-		public void Draw(RenderTarget rt, Vector2f position)
+		public void Draw(RenderTarget renderTarget, Vector2f position)
 		{
 			PaletteTexture.Update(Palette);
 			dataTexture.Update(data);
 
 			Sprite s = new Sprite(display.Texture);
 			s.Position = position;
-			rt.Draw(s, new RenderStates(renderer));
-		}
-
-		public override void Clear(Character character)
-		{
-			color.R = (byte)character.Char;
-			color.G = character.Fore;
-			color.B = character.Back;
-
-			for (uint y = 0; y < Height; y++)
-			{
-				for (uint x = 0; x < Width; x++)
-				{
-					data.SetPixel(x, y, color);
-				}
-			}
+			renderTarget.Draw(s, new RenderStates(renderer));
 		}
 
 		public override void Set(int x, int y, Character character)
@@ -66,8 +47,8 @@ namespace Texter
 			if (x < 0 || x >= Width || y < 0 || y >= Height)
 				return;
 			color.R = (byte)character.Char;
-			color.G = character.Fore;
-			color.B = character.Back;
+			color.G = character.ForegroundColor;
+			color.B = character.BackgroundColor;
 			data.SetPixel((uint)x, (uint)y, color);
 		}
 

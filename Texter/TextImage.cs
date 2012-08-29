@@ -6,7 +6,7 @@ namespace Texter
 	{
 		Character[,] data;
 
-		public TextImage(int width, int height)
+		public TextImage(uint width, uint height)
 		{
 			Width = width;
 			Height = height;
@@ -17,17 +17,6 @@ namespace Texter
 				for (uint x = 0; x < Width; x++)
 				{
 					data[x, y] = Character.Create(0, 15, 0);
-				}
-			}
-		}
-
-		public override void Clear(Character character)
-		{
-			for (uint y = 0; y < Height; y++)
-			{
-				for (uint x = 0; x < Width; x++)
-				{
-					data[x, y] = character;
 				}
 			}
 		}

@@ -8,13 +8,13 @@ namespace Texter
 	public partial class TextDisplay : TextRenderer
 	{
 		#region Shaders
-		const string DisplayVertexShader = @"
+		static string DisplayVertexShader = @"
 void main() {
 	gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
 }";
 
-		const string DisplayFragmentShader = @"
+		static string DisplayFragmentShader = @"
 #version 130
 #extension GL_EXT_gpu_shader4 : enable
 
@@ -58,35 +58,38 @@ void main() {
 }";
 		#endregion
 
-		public const int DefaultCharacterWidth = 6;
-		public const int DefaultCharacterHeight = 8;
+		public static uint CharacterWidth { get; private set; }
+		public static uint CharacterHeight { get; private set; }
 
-		public static string DataFolder = "Data/";
+		static Image Palette;
+		static Texture PaletteTexture;
+		static Texture FontTexture;
 
-		public static Image Palette;
-		public static Texture PaletteTexture;
-		public static Texture FontTexture;
-
-		public static void Initialize()
+		public static void Initialize(uint characterWidth = 6, uint characterHeight = 8, string dataFolder = "Data/")
 		{
-			Palette = new Image(Path.Combine(DataFolder, "Palette.png"));
+			if (Palette != null)
+				throw new Exception("Texter.TextDisplay.Initialize can not be called twice");
+
+			CharacterWidth = characterWidth;
+			CharacterHeight = characterHeight;
+
+			Palette = new Image(Path.Combine(dataFolder, "Palette.png"));
 			PaletteTexture = new Texture(Palette);
-			FontTexture = new Texture(Path.Combine(DataFolder, "Font.png"));
+
+			FontTexture = new Texture(Path.Combine(dataFolder, "Font.png"));
+
+			DisplayFragmentShader = DisplayFragmentShader
+					.Replace("#W#", CharacterWidth.ToString())
+					.Replace("#H#", CharacterHeight.ToString());
 		}
 
-		public static void PaletteSet(int index, Color color)
+		public static void PaletteSet(byte index, Color color)
 		{
-			if (index < 0 || index > 255)
-				throw new ArgumentOutOfRangeException();
-
 			Palette.SetPixel((uint)index, 0, color);
 		}
 
-		public static Color PaletteGet(int index)
+		public static Color PaletteGet(byte index)
 		{
-			if (index < 0 || index > 255)
-				throw new ArgumentOutOfRangeException();
-
 			return Palette.GetPixel((uint)index, 0);
 		}
 	}

@@ -4,31 +4,50 @@ namespace Texter
 {
 	public class Character
 	{
-		public byte Char, Fore, Back;
+		public byte Char, ForegroundColor, BackgroundColor;
+
+		public static Character Create(char character, byte foregroundColor, byte backgroundColor)
+		{
+			Character c = new Character();
+			c.Char = (byte)character;
+			c.ForegroundColor = foregroundColor;
+			c.BackgroundColor = backgroundColor;
+			return c;
+		}
 
 		public static Character Create(byte character, byte foregroundColor, byte backgroundColor)
 		{
 			Character c = new Character();
 			c.Char = character;
-			c.Fore = foregroundColor;
-			c.Back = backgroundColor;
+			c.ForegroundColor = foregroundColor;
+			c.BackgroundColor = backgroundColor;
 			return c;
 		}
 	}
 
 	public abstract class TextRenderer
 	{
-		public int Width { get; protected set; }
-		public int Height { get; protected set; }
+		public uint Width { get; protected set; }
+		public uint Height { get; protected set; }
 
-		public abstract void Clear(Character character);
 		public abstract void Set(int x, int y, Character character);
 		public abstract Character Get(int x, int y);
 
+		public void Clear(Character character)
+		{
+			for (int y = 0; y < Height; y++)
+			{
+				for (int x = 0; x < Width; x++)
+				{
+					Set(x, y, character);
+				}
+			}
+		}
+
 		public void DrawImage(int x, int y, TextImage image)
 		{
-			int endX = Math.Min(x + image.Width, Width);
-			int endY = Math.Min(y + image.Width, Height);
+			int endX = Math.Min(x + (int)image.Width, (int)Width);
+			int endY = Math.Min(y + (int)image.Width, (int)Height);
 			int xStart = x;
 
 			for (; y < endY; y++)
@@ -40,7 +59,7 @@ namespace Texter
 			}
 		}
 
-		public void DrawImagePartial(int x, int y, TextImage image, int startX, int startY, int width, int height)
+		public void DrawImagePartial(int x, int y, TextImage image, int startX, int startY, uint width, uint height)
 		{
 			if (startX < 0 || startY < 0 || width < 0 || height < 0)
 				throw new ArgumentOutOfRangeException();
@@ -48,8 +67,8 @@ namespace Texter
 			if (x >= width || y >= height || x <= -width || y <= -height)
 				return;
 
-			int endX = Math.Min(x + width - 1, image.Width - 1);
-			int endY = Math.Min(y + height - 1, image.Height - 1);
+			int endX = Math.Min(x + (int)width - 1, (int)image.Width - 1);
+			int endY = Math.Min(y + (int)height - 1, (int)image.Height - 1);
 			int imgX = startX;
 			int imgY = startY;
 			int xStart = x;
@@ -77,7 +96,7 @@ namespace Texter
 					continue;
 				}
 
-				Set(x, y, Character.Create((byte)c, foregroundColor, backgroundColor));
+				Set(x, y, Character.Create(c, foregroundColor, backgroundColor));
 				x++;
 			}
 		}

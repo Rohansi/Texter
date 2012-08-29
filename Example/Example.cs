@@ -10,25 +10,26 @@ namespace Example
 		const int Width = 132;
 		const int Height = 60;
 
+		TextDisplay example; 
+		
 		bool running = true;
 		RenderWindow window;
-		TextDisplay example;
 
 		public Example()
 		{
+			// Initialize Texter
+			TextDisplay.Initialize();
+
+			// Create a TextDisplay to render onto our window
+			example = new TextDisplay(Width, Height);
+
 			// Setup an SFML window
-			window = new RenderWindow(new VideoMode(Width * 6, Height * 8), "Texter Example", Styles.Close);
+			window = new RenderWindow(new VideoMode(Width * TextDisplay.CharacterWidth, Height * TextDisplay.CharacterHeight), "Texter Example", Styles.Close);
 			window.SetFramerateLimit(30);
 			window.Closed += (sender, e) =>
 			{
 				running = false;
 			};
-
-			// Initialize Texter, if needed you can change the Data folder from its default before initializing
-			TextDisplay.Initialize();
-
-			// Create a TextDisplay to render onto our window
-			example = new TextDisplay(Width, Height);
 		}
 
 		public void Run()
@@ -42,7 +43,7 @@ namespace Example
 				window.Clear(Color.White);
 
 				// Clear the TextDisplay to a Character, this is not required but I do it anyways
-				example.Clear(Character.Create(0, 0, 0));
+				//example.Clear(Character.Create(' ', 0, 0));
 
 				// Render our fractal, I think I got this code from Wikipedia and added zooming
 				for (int y = 0; y < Height; y++)
@@ -74,7 +75,7 @@ namespace Example
 						byte color = (byte)(((double)iteration / maxIteration) * 255);
 
 						// Modifying the TextDisplay per Character
-						example.Set(x, y, Character.Create(32, 0, color));
+						example.Set(x, y, Character.Create(' ', 0, color));
 					}
 				}
 
