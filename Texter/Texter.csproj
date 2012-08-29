@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TextDisplay.cs" />
+    <Compile Include="TextDisplay.Static.cs" />
     <Compile Include="TextImage.cs" />
     <Compile Include="TextRenderer.cs" />
   </ItemGroup>

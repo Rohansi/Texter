@@ -14,34 +14,37 @@ namespace Example
 		RenderWindow window;
 		TextDisplay example;
 
-		Random r;
-
 		public Example()
 		{
-			window = new RenderWindow(new VideoMode(Width * 6, Height * 8), "", Styles.Close);
-
+			// Setup an SFML window
+			window = new RenderWindow(new VideoMode(Width * 6, Height * 8), "Texter Example", Styles.Close);
 			window.SetFramerateLimit(30);
-
 			window.Closed += (sender, e) =>
 			{
 				running = false;
 			};
 
-			example = new TextDisplay(Width, Height);
+			// Initialize Texter, if needed you can change the Data folder from its default before initializing
+			TextDisplay.Initialize();
 
-			r = new Random();
+			// Create a TextDisplay to render onto our window
+			example = new TextDisplay(Width, Height);
 		}
 
 		public void Run()
 		{
-			double t = 0;
+			double time = 0;
 
 			while (running)
 			{
+				// Normal SFML stuff
 				window.DispatchEvents();
 				window.Clear(Color.White);
+
+				// Clear the TextDisplay to a Character, this is not required but I do it anyways
 				example.Clear(Character.Create(0, 0, 0));
 
+				// Render our fractal, I think I got this code from Wikipedia and added zooming
 				for (int y = 0; y < Height; y++)
 				{
 					for (int x = 0; x < Width; x++)
@@ -49,9 +52,9 @@ namespace Example
 						double x0 = (((double)x / Width) * 3.5) - 2.5;
 						double y0 = (((double)y / Height) * 2.0) - 1;
 
-						// zooming
-						x0 /= 1 + Math.Sin(t) * 1;
-						y0 /= 1 + Math.Sin(t) * 1;
+						// Zooming
+						x0 /= 1 + Math.Sin(time) * 1;
+						y0 /= 1 + Math.Sin(time) * 1;
 
 						double xx = 0;
 						double yy = 0;
@@ -68,14 +71,23 @@ namespace Example
 							iteration++;
 						}
 
-						example.Set(x, y, Character.Create(32, 0, (byte)(((double)iteration / maxIteration) * 255)));
+						byte color = (byte)(((double)iteration / maxIteration) * 255);
+
+						// Modifying the TextDisplay per Character
+						example.Set(x, y, Character.Create(32, 0, color));
 					}
 				}
 
+				// And modifying the TextDisplay with DrawText
+				example.DrawText(10, 10, "Hello, world!", 255);
+
+				// Render the TextDisplay to the SFML window
 				example.Draw(window, new Vector2f(0, 0));
+
+				// And finally have SFML display it to us
 				window.Display();
 
-				t += 0.1;
+				time += 0.1;
 			}
 		}
 	}
