@@ -1,5 +1,6 @@
 bin
 obj
 *.suo
+*.csproj.user
 
 Thumbs.db

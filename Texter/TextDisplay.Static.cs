@@ -67,7 +67,7 @@ void main() {
 		public static void Initialize(uint characterWidth = 8, uint characterHeight = 12, string dataFolder = "Data/")
 		{
 			if (Palette != null)
-				throw new Exception("Texter.TextDisplay.Initialize can not be called twice");
+				throw new Exception("Initialize was already called");
 
 			CharacterWidth = characterWidth;
 			CharacterHeight = characterHeight;
