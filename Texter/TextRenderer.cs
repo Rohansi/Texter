@@ -2,29 +2,6 @@
 
 namespace Texter
 {
-	public class Character
-	{
-		public byte Char, ForegroundColor, BackgroundColor;
-
-		public static Character Create(char character, byte foregroundColor, byte backgroundColor)
-		{
-			Character c = new Character();
-			c.Char = (byte)character;
-			c.ForegroundColor = foregroundColor;
-			c.BackgroundColor = backgroundColor;
-			return c;
-		}
-
-		public static Character Create(byte character, byte foregroundColor, byte backgroundColor)
-		{
-			Character c = new Character();
-			c.Char = character;
-			c.ForegroundColor = foregroundColor;
-			c.BackgroundColor = backgroundColor;
-			return c;
-		}
-	}
-
 	public abstract class TextRenderer
 	{
 		public uint Width { get; protected set; }
@@ -44,7 +21,7 @@ namespace Texter
 			}
 		}
 
-		public void DrawImage(int x, int y, TextImage image)
+		public void DrawImage(int x, int y, TextRenderer image)
 		{
 			int endX = Math.Min(x + (int)image.Width, (int)Width);
 			int endY = Math.Min(y + (int)image.Width, (int)Height);
@@ -59,7 +36,7 @@ namespace Texter
 			}
 		}
 
-		public void DrawImagePartial(int x, int y, TextImage image, int startX, int startY, uint width, uint height)
+		public void DrawImagePartial(int x, int y, TextRenderer image, int startX, int startY, uint width, uint height)
 		{
 			if (startX < 0 || startY < 0 || width < 0 || height < 0)
 				throw new ArgumentOutOfRangeException();
@@ -85,7 +62,7 @@ namespace Texter
 			}
 		}
 
-		public void DrawText(int x, int y, string text, byte foregroundColor = 15, byte backgroundColor = 0)
+		public void DrawText(int x, int y, string text, int foregroundColor, int backgroundColor = -1)
 		{
 			foreach (char c in text)
 			{

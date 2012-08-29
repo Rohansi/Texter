@@ -46,6 +46,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Character.cs" />
     <Compile Include="TextDisplay.cs" />
     <Compile Include="TextDisplay.Static.cs" />
     <Compile Include="TextImage.cs" />

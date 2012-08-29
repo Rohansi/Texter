@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
-using SFML.Window;
 using SFML.Graphics;
+using SFML.Window;
 
 namespace Texter
 {
@@ -46,9 +45,28 @@ namespace Texter
 		{
 			if (x < 0 || x >= Width || y < 0 || y >= Height)
 				return;
-			color.R = (byte)character.Char;
-			color.G = character.ForegroundColor;
-			color.B = character.BackgroundColor;
+
+			int glyph = character.Glyph;
+			int fore = character.ForegroundColor;
+			int back = character.BackgroundColor;
+
+			if (character.HasTransparentComponent)
+			{
+				Character ch = Get(x, y);
+
+				if (glyph == -1)
+					glyph = ch.Glyph;
+
+				if (fore == -1)
+					fore = ch.ForegroundColor;
+
+				if (back == -1)
+					back = ch.BackgroundColor;
+			}
+
+			color.R = (byte)glyph;
+			color.G = (byte)fore;
+			color.B = (byte)back;
 			data.SetPixel((uint)x, (uint)y, color);
 		}
 

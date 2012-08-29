@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using SFML.Window;
 using SFML.Graphics;
 
 namespace Texter
@@ -65,7 +64,7 @@ void main() {
 		static Texture PaletteTexture;
 		static Texture FontTexture;
 
-		public static void Initialize(uint characterWidth = 6, uint characterHeight = 8, string dataFolder = "Data/")
+		public static void Initialize(uint characterWidth = 8, uint characterHeight = 12, string dataFolder = "Data/")
 		{
 			if (Palette != null)
 				throw new Exception("Texter.TextDisplay.Initialize can not be called twice");

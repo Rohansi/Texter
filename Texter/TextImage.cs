@@ -26,7 +26,29 @@ namespace Texter
 			if (x < 0 || x >= Width || y < 0 || y >= Height)
 				return;
 
-			data[x, y] = character;
+			if (character.HasTransparentComponent)
+			{
+				int glyph = character.Glyph;
+				int fore = character.ForegroundColor;
+				int back = character.BackgroundColor;
+
+				Character ch = Get(x, y);
+
+				if (glyph == -1)
+					glyph = ch.Glyph;
+
+				if (fore == -1)
+					fore = ch.ForegroundColor;
+
+				if (back == -1)
+					back = ch.BackgroundColor;
+
+				data[x, y] = Character.Create(glyph, fore, back);
+			}
+			else
+			{
+				data[x, y] = character;
+			}
 		}
 
 		public override Character Get(int x, int y)

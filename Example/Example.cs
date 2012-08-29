@@ -7,8 +7,8 @@ namespace Example
 {
 	class Example
 	{
-		const int Width = 132;
-		const int Height = 60;
+		const int Width = 80;
+		const int Height = 25;
 
 		TextDisplay example; 
 		
@@ -43,7 +43,7 @@ namespace Example
 				window.Clear(Color.White);
 
 				// Clear the TextDisplay to a Character, this is not required but I do it anyways
-				//example.Clear(Character.Create(' ', 0, 0));
+				example.Clear(Character.Create(' ', 0, 0));
 
 				// Render our fractal, I think I got this code from Wikipedia and added zooming
 				for (int y = 0; y < Height; y++)
@@ -79,8 +79,8 @@ namespace Example
 					}
 				}
 
-				// And modifying the TextDisplay with DrawText
-				example.DrawText(10, 10, "Hello, world!", 255);
+				// And modifying the TextDisplay with DrawText, black with a transparent background
+				example.DrawText(25, 12, "Hello, world!", 0, -1);
 
 				// Render the TextDisplay to the SFML window
 				example.Draw(window, new Vector2f(0, 0));
