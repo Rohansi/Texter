@@ -48,8 +48,8 @@ namespace Texter
 				return;
 
 			int glyph = character.Glyph;
-			int fore = character.ForegroundColor;
-			int back = character.BackgroundColor;
+			int fore = character.Foreground;
+			int back = character.Background;
 
 			if (character.HasTransparentComponent)
 			{
@@ -59,10 +59,10 @@ namespace Texter
 					glyph = ch.Glyph;
 
 				if (fore == -1)
-					fore = ch.ForegroundColor;
+					fore = ch.Foreground;
 
 				if (back == -1)
-					back = ch.BackgroundColor;
+					back = ch.Background;
 			}
 
 			color.R = (byte)glyph;

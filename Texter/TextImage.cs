@@ -29,8 +29,8 @@ namespace Texter
 			if (character.HasTransparentComponent)
 			{
 				int glyph = character.Glyph;
-				int fore = character.ForegroundColor;
-				int back = character.BackgroundColor;
+				int fore = character.Foreground;
+				int back = character.Background;
 
 				Character ch = Get(x, y);
 
@@ -38,10 +38,10 @@ namespace Texter
 					glyph = ch.Glyph;
 
 				if (fore == -1)
-					fore = ch.ForegroundColor;
+					fore = ch.Foreground;
 
 				if (back == -1)
-					back = ch.BackgroundColor;
+					back = ch.Background;
 
 				data[x, y] = Character.Create(glyph, fore, back);
 			}

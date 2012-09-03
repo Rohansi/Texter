@@ -36,18 +36,15 @@ namespace Texter
 			}
 		}
 
-		public void DrawImagePartial(int x, int y, TextRenderer image, int startX, int startY, uint width, uint height)
+		public void DrawImagePartial(int x, int y, TextRenderer image, uint startX, uint startY, uint width, uint height)
 		{
-			if (startX < 0 || startY < 0)
-				throw new ArgumentOutOfRangeException("startX or startY");
-
 			if (x >= width || y >= height || x <= -width || y <= -height)
 				return;
 
 			int endX = Math.Min(x + (int)width - 1, (int)image.Width - 1);
 			int endY = Math.Min(y + (int)height - 1, (int)image.Height - 1);
-			int imgX = startX;
-			int imgY = startY;
+			int imgX = (int)startX;
+			int imgY = (int)startY;
 			int xStart = x;
 
 			for (; y <= endY; y++)
@@ -57,12 +54,12 @@ namespace Texter
 					Set(x, y, image.Get(imgX++, imgY));
 				}
 
-				imgX = startX;
+				imgX = (int)startX;
 				imgY++;
 			}
 		}
 
-		public void DrawText(int x, int y, string text, int foregroundColor, int backgroundColor = -1)
+		public void DrawText(int x, int y, string text, Character color)
 		{
 			foreach (char c in text)
 			{
@@ -73,8 +70,25 @@ namespace Texter
 					continue;
 				}
 
-				Set(x, y, Character.Create(c, foregroundColor, backgroundColor));
+				Set(x, y, Character.Create(c, color.Foreground, color.Background));
 				x++;
+			}
+		}
+
+		public void DrawRectangle(int x, int y, uint w, uint h, Character fill, Character border = null)
+		{
+			for (int yy = y; yy < y + h; yy++)
+			{
+				for (int xx = x; xx < x + w; xx++)
+				{
+					if (border != null && (xx == x || yy == y || xx == (x + w - 1) || yy == (y + h - 1)))
+					{
+						Set(xx, yy, border);
+						continue;
+					}
+
+					Set(xx, yy, fill);
+				}
 			}
 		}
 	}

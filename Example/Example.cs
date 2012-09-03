@@ -43,7 +43,7 @@ namespace Example
 				window.Clear(Color.White);
 
 				// Clear the TextDisplay to a Character, this is not required but I do it anyways
-				example.Clear(Character.Create(' ', 0, 0));
+				example.Clear(Character.Blank);
 
 				// Render our fractal, I think I got this code from Wikipedia and added zooming
 				for (int y = 0; y < Height; y++)
@@ -60,8 +60,8 @@ namespace Example
 						double xx = 0;
 						double yy = 0;
 
+						const int maxIteration = 24;
 						int iteration = 0;
-						int maxIteration = 24;
 
 						while (xx * xx + yy * yy < 2 * 2 && iteration < maxIteration)
 						{
@@ -75,12 +75,15 @@ namespace Example
 						byte color = (byte)(((double)iteration / maxIteration) * 255);
 
 						// Modifying the TextDisplay per Character
-						example.Set(x, y, Character.Create(' ', 0, color));
+						example.Set(x, y, Character.Create(background: color));
 					}
 				}
 
-				// And modifying the TextDisplay with DrawText, black with a transparent background
-				example.DrawText(25, 12, "Hello, world!", 0);
+				// Render a rectangle to contain our message
+				example.DrawRectangle(22, 10, 19, 5, Character.Create(background: 128), Character.Create('@', foreground: 0));
+
+				// And then we render our message onto the rectangle
+				example.DrawText(25, 12, "Hello, world!", Character.Create(foreground: 0));
 
 				// Render the TextDisplay to the SFML window
 				example.Draw(window, new Vector2f(0, 0));
