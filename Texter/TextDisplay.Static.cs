@@ -4,16 +4,16 @@ using SFML.Graphics;
 
 namespace Texter
 {
-	public partial class TextDisplay : TextRenderer
+	public partial class TextDisplay
 	{
 		#region Shaders
-		static string DisplayVertexShader = @"
+		static string displayVertexShader = @"
 void main() {
 	gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
 	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
 }";
 
-		static string DisplayFragmentShader = @"
+		static string displayFragmentShader = @"
 #version 130
 #extension GL_EXT_gpu_shader4 : enable
 
@@ -60,36 +60,36 @@ void main() {
 		public static uint CharacterWidth { get; private set; }
 		public static uint CharacterHeight { get; private set; }
 
-		static Image Palette;
-		static Texture PaletteTexture;
-		static Texture FontTexture;
+		static Image palette;
+		static Texture paletteTexture;
+		static Texture fontTexture;
 
 		public static void Initialize(uint characterWidth = 8, uint characterHeight = 12, string dataFolder = "Data/")
 		{
-			if (Palette != null)
+			if (palette != null)
 				throw new Exception("Initialize was already called");
 
 			CharacterWidth = characterWidth;
 			CharacterHeight = characterHeight;
 
-			Palette = new Image(Path.Combine(dataFolder, "Palette.png"));
-			PaletteTexture = new Texture(Palette);
+			palette = new Image(Path.Combine(dataFolder, "Palette.png"));
+			paletteTexture = new Texture(palette);
 
-			FontTexture = new Texture(Path.Combine(dataFolder, "Font.png"));
+			fontTexture = new Texture(Path.Combine(dataFolder, "Font.png"));
 
-			DisplayFragmentShader = DisplayFragmentShader
+			displayFragmentShader = displayFragmentShader
 					.Replace("#W#", CharacterWidth.ToString())
 					.Replace("#H#", CharacterHeight.ToString());
 		}
 
 		public static void PaletteSet(byte index, Color color)
 		{
-			Palette.SetPixel((uint)index, 0, color);
+			palette.SetPixel(index, 0, color);
 		}
 
 		public static Color PaletteGet(byte index)
 		{
-			return Palette.GetPixel((uint)index, 0);
+			return palette.GetPixel(index, 0);
 		}
 	}
 }

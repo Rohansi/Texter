@@ -22,22 +22,23 @@ namespace Texter
 			data = new Image(width, height, Color.Black);
 			dataTexture = new Texture(data);
 
-			display = new RenderTexture((uint)width * CharacterWidth, (uint)height * CharacterHeight);
+			display = new RenderTexture(width * CharacterWidth, height * CharacterHeight);
 
-			renderer = Shader.FromString(DisplayVertexShader, DisplayFragmentShader);
+			renderer = Shader.FromString(displayVertexShader, displayFragmentShader);
 			renderer.SetParameter("data", dataTexture);
 			renderer.SetParameter("dataSize", width, height);
-			renderer.SetParameter("font", FontTexture);
-			renderer.SetParameter("palette", PaletteTexture);
+			renderer.SetParameter("font", fontTexture);
+			renderer.SetParameter("palette", paletteTexture);
 		}
 
 		public void Draw(RenderTarget renderTarget, Vector2f position)
 		{
-			PaletteTexture.Update(Palette);
+			paletteTexture.Update(palette);
 			dataTexture.Update(data);
 
 			Sprite s = new Sprite(display.Texture);
 			s.Position = position;
+         
 			renderTarget.Draw(s, new RenderStates(renderer));
 		}
 

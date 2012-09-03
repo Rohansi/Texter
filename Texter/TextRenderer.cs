@@ -38,8 +38,8 @@ namespace Texter
 
 		public void DrawImagePartial(int x, int y, TextRenderer image, int startX, int startY, uint width, uint height)
 		{
-			if (startX < 0 || startY < 0 || width < 0 || height < 0)
-				throw new ArgumentOutOfRangeException();
+			if (startX < 0 || startY < 0)
+				throw new ArgumentOutOfRangeException("startX or startY");
 
 			if (x >= width || y >= height || x <= -width || y <= -height)
 				return;

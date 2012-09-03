@@ -30,21 +30,22 @@ namespace Texter
 			if (backgroundColor < byte.MinValue || backgroundColor > byte.MaxValue)
 				backgroundColor = -1;
 
-			Character c = new Character();
-			c.Glyph = glyph;
-			c.ForegroundColor = foregroundColor;
-			c.BackgroundColor = backgroundColor;
-			return c;
+			return new Character
+			{
+				Glyph = glyph,
+				ForegroundColor = foregroundColor,
+				BackgroundColor = backgroundColor
+			};
 		}
 
 		public static Character Create(char glyph, int foregroundColor, int backgroundColor)
 		{
-			return Character.Create((byte)glyph, foregroundColor, backgroundColor);
+			return Create((byte)glyph, foregroundColor, backgroundColor);
 		}
 
 		public Character Clone()
 		{
-			return Character.Create(Glyph, ForegroundColor, BackgroundColor);
+			return Create(Glyph, ForegroundColor, BackgroundColor);
 		}
 	}
 }

@@ -80,7 +80,7 @@ namespace Example
 				}
 
 				// And modifying the TextDisplay with DrawText, black with a transparent background
-				example.DrawText(25, 12, "Hello, world!", 0, -1);
+				example.DrawText(25, 12, "Hello, world!", 0);
 
 				// Render the TextDisplay to the SFML window
 				example.Draw(window, new Vector2f(0, 0));
