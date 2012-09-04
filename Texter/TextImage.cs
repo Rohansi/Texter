@@ -12,21 +12,15 @@ namespace Texter
 			Height = height;
 
 			data = new Character[width, height];
-			for (uint y = 0; y < Height; y++)
-			{
-				for (uint x = 0; x < Width; x++)
-				{
-					data[x, y] = Character.Create(0, 15, 0);
-				}
-			}
+			Clear(Character.Blank);
 		}
 
-		public override void Set(int x, int y, Character character)
+		public override void Set(int x, int y, Character character, bool blend = true)
 		{
-			if (x < 0 || x >= Width || y < 0 || y >= Height)
+			if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
 				return;
 
-			if (character.HasTransparentComponent)
+			if (blend && character.HasTransparentComponent)
 			{
 				int glyph = character.Glyph;
 				int fore = character.Foreground;
@@ -53,8 +47,8 @@ namespace Texter
 
 		public override Character Get(int x, int y)
 		{
-			if (x < 0 || x > Width || y < 0 || y > Height)
-				throw new ArgumentOutOfRangeException();
+			if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
+				return Character.Blank;
 
 			return data[x, y];
 		}

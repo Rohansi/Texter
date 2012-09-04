@@ -8,7 +8,7 @@ namespace Texter
 	public class Character
 	{
 		public static readonly Character Blank = Create(0, 0, 0);
-		
+
 		public int Glyph { get; private set; }
 		public int Foreground { get; private set; }
 		public int Background { get; private set; }

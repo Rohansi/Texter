@@ -10,8 +10,8 @@ namespace Example
 		const int Width = 80;
 		const int Height = 25;
 
-		TextDisplay example; 
-		
+		TextDisplay example;
+
 		bool running = true;
 		RenderWindow window;
 
@@ -50,8 +50,11 @@ namespace Example
 				{
 					for (int x = 0; x < Width; x++)
 					{
-						double x0 = (((double)x / Width) * 3.5) - 2.5;
-						double y0 = (((double)y / Height) * 2.0) - 1;
+						double posX = (double)x / Width;
+						double posY = (double)y / Height;
+
+						double x0 = (posX * 3.5) - 2.5;
+						double y0 = (posY * 2.0) - 1;
 
 						// Zooming
 						x0 /= 1 + Math.Sin(time) * 1;
@@ -72,7 +75,8 @@ namespace Example
 							iteration++;
 						}
 
-						byte color = (byte)(((double)iteration / maxIteration) * 255);
+						double colorPercentage = (double)iteration / maxIteration;
+						byte color = (byte)(colorPercentage * 255);
 
 						// Modifying the TextDisplay per Character
 						example.Set(x, y, Character.Create(background: color));

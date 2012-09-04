@@ -38,13 +38,13 @@ namespace Texter
 
 			Sprite s = new Sprite(display.Texture);
 			s.Position = position;
-         
+
 			renderTarget.Draw(s, new RenderStates(renderer));
 		}
 
-		public override void Set(int x, int y, Character character)
+		public override void Set(int x, int y, Character character, bool blend = true)
 		{
-			if (x < 0 || x >= Width || y < 0 || y >= Height)
+			if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
 				return;
 
 			int glyph = character.Glyph;
@@ -73,8 +73,9 @@ namespace Texter
 
 		public override Character Get(int x, int y)
 		{
-			if (x < 0 || x >= Width || y < 0 || y >= Height)
-				return Character.Create(0, 0, 0);
+			if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
+				return Character.Blank;
+
 			Color p = data.GetPixel((uint)x, (uint)y);
 			return Character.Create(p.R, p.G, p.B);
 		}

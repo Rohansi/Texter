@@ -7,7 +7,7 @@ namespace Texter
 		public uint Width { get; protected set; }
 		public uint Height { get; protected set; }
 
-		public abstract void Set(int x, int y, Character character);
+		public abstract void Set(int x, int y, Character character, bool blend = true);
 		public abstract Character Get(int x, int y);
 
 		public void Clear(Character character)
@@ -16,46 +16,36 @@ namespace Texter
 			{
 				for (int x = 0; x < Width; x++)
 				{
-					Set(x, y, character);
+					Set(x, y, character, false);
 				}
 			}
 		}
 
 		public void DrawImage(int x, int y, TextRenderer image)
 		{
-			int endX = Math.Min(x + (int)image.Width, (int)Width);
-			int endY = Math.Min(y + (int)image.Width, (int)Height);
-			int xStart = x;
+			if (x < -image.Width || x > Width || y < -image.Height || y > Height)
+				return;
 
-			for (; y < endY; y++)
+			for (int yy = 0; yy < image.Height; yy++)
 			{
-				for (x = xStart; x < endX; x++)
+				for (int xx = 0; xx < image.Width; xx++)
 				{
-					Set(x, y, image.Get(x, y));
+					Set(x + xx, y + yy, image.Get(xx, yy));
 				}
 			}
 		}
 
 		public void DrawImagePartial(int x, int y, TextRenderer image, uint startX, uint startY, uint width, uint height)
 		{
-			if (x >= width || y >= height || x <= -width || y <= -height)
+			if (x < -width || x > Width || y < -height || y > Height)
 				return;
 
-			int endX = Math.Min(x + (int)width - 1, (int)image.Width - 1);
-			int endY = Math.Min(y + (int)height - 1, (int)image.Height - 1);
-			int imgX = (int)startX;
-			int imgY = (int)startY;
-			int xStart = x;
-
-			for (; y <= endY; y++)
+			for (int yy = 0; yy < height; yy++)
 			{
-				for (x = xStart; x <= endX; x++)
+				for (int xx = 0; xx < width; xx++)
 				{
-					Set(x, y, image.Get(imgX++, imgY));
+					Set(x + xx, y + yy, image.Get((int)startX + xx, (int)startY + yy));
 				}
-
-				imgX = (int)startX;
-				imgY++;
 			}
 		}
 
