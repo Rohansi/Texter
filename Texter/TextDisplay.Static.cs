@@ -4,92 +4,32 @@ using SFML.Graphics;
 
 namespace Texter
 {
-	public partial class TextDisplay
-	{
-		#region Shaders
-		static string displayVertexShader = @"
-void main() {
-	gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
-	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
-}";
+    public partial class TextDisplay
+    {
+        static Image palette;
+        static Texture fontTexture;
+        static string displayVertexSource;
+        static string displayFragmentSource;
 
-		static string displayFragmentShader = @"
-#version 130
-#extension GL_EXT_gpu_shader4 : enable
+        public static uint CharacterWidth { get; private set; }
+        public static uint CharacterHeight { get; private set; }
 
-const ivec2 charSize	= ivec2(#W#, #H#);
-const ivec2 fontSizeC	= ivec2(16, 16);
-const ivec2 fontSize	= ivec2(charSize.x * fontSizeC.x, charSize.y * fontSizeC.y);
+        public static void Initialize(uint characterWidth = 8, uint characterHeight = 12, string dataFolder = "Data/")
+        {
+            if (palette != null)
+                throw new Exception("TextDisplay.Initialize was already called");
 
-uniform sampler2D	data;
-uniform vec2		dataSize;
-uniform sampler2D	font;
-uniform sampler2D	palette;
+            CharacterWidth = characterWidth;
+            CharacterHeight = characterHeight;
 
-vec4 texelGet(sampler2D tex, ivec2 size, ivec2 coord) {
-	return texture2D(tex, vec2(float(coord.x) / float(size.x),
-						       float(coord.y) / float(size.y)));
-}
+            palette = new Image(Path.Combine(dataFolder, "palette.png"));
 
-void main() {
-	ivec2 chPos = ivec2(int(gl_TexCoord[0].x * (dataSize.x * charSize.x)) / charSize.x,
-						int(gl_TexCoord[0].y * (dataSize.y * charSize.y)) / charSize.y);
+            fontTexture = new Texture(Path.Combine(dataFolder, "font.png"));
 
-	// r - character
-	// g - foreground color
-	// b - background color
-	vec4 chData = texelGet(data, ivec2(dataSize) - 1, chPos);
-
-	int ch = int(chData.r * 255);
-
-	ivec2 fnPos = ivec2((ch % fontSizeC.x) * charSize.x, (ch / fontSizeC.y) * charSize.y);
-
-	ivec2 offset = ivec2(int(gl_TexCoord[0].x * (dataSize.x * charSize.x)) % charSize.x, 
-						 int(gl_TexCoord[0].y * (dataSize.y * charSize.y)) % charSize.y);
-
-	vec4 fnCol = texelGet(font, fontSize - 1, fnPos + offset);
-
-	if (fnCol.rgb == 1) {
-		gl_FragColor = texelGet(palette, ivec2(255, 1), ivec2(int(chData.g * 255), 0));
-	} else if (fnCol.rgb == 0) {
-		gl_FragColor = texelGet(palette, ivec2(255, 1), ivec2(int(chData.b * 255), 0));
-	}
-}";
-		#endregion
-
-		public static uint CharacterWidth { get; private set; }
-		public static uint CharacterHeight { get; private set; }
-
-		static Image palette;
-		static Texture paletteTexture;
-		static Texture fontTexture;
-
-		public static void Initialize(uint characterWidth = 8, uint characterHeight = 12, string dataFolder = "Data/")
-		{
-			if (palette != null)
-				throw new Exception("Initialize was already called");
-
-			CharacterWidth = characterWidth;
-			CharacterHeight = characterHeight;
-
-			palette = new Image(Path.Combine(dataFolder, "Palette.png"));
-			paletteTexture = new Texture(palette);
-
-			fontTexture = new Texture(Path.Combine(dataFolder, "Font.png"));
-
-			displayFragmentShader = displayFragmentShader
-					.Replace("#W#", CharacterWidth.ToString())
-					.Replace("#H#", CharacterHeight.ToString());
-		}
-
-		public static void PaletteSet(byte index, Color color)
-		{
-			palette.SetPixel(index, 0, color);
-		}
-
-		public static Color PaletteGet(byte index)
-		{
-			return palette.GetPixel(index, 0);
-		}
-	}
+            displayVertexSource = File.ReadAllText(Path.Combine(dataFolder, "texterV.txt"));
+            displayFragmentSource = File.ReadAllText(Path.Combine(dataFolder, "texterF.txt"))
+                    .Replace("#W#", CharacterWidth.ToString("G"))
+                    .Replace("#H#", CharacterHeight.ToString("G"));
+        }
+    }
 }
