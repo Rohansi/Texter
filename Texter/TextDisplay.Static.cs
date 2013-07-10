@@ -26,8 +26,8 @@ namespace Texter
 
             fontTexture = new Texture(Path.Combine(dataFolder, "font.png"));
 
-            displayVertexSource = File.ReadAllText(Path.Combine(dataFolder, "texterV.txt"));
-            displayFragmentSource = File.ReadAllText(Path.Combine(dataFolder, "texterF.txt"))
+            displayVertexSource = File.ReadAllText(Path.Combine(dataFolder, "texter.vert"));
+            displayFragmentSource = File.ReadAllText(Path.Combine(dataFolder, "texter.frag"))
                     .Replace("#W#", CharacterWidth.ToString("G"))
                     .Replace("#H#", CharacterHeight.ToString("G"));
         }
