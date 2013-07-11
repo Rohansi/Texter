@@ -6,7 +6,7 @@ namespace Texter
 {
     public partial class TextDisplay
     {
-        static Image palette;
+        static string paletteFile;
         static Texture fontTexture;
         static string displayVertexSource;
         static string displayFragmentSource;
@@ -16,13 +16,13 @@ namespace Texter
 
         public static void Initialize(uint characterWidth = 8, uint characterHeight = 12, string dataFolder = "Data/")
         {
-            if (palette != null)
+            if (fontTexture != null)
                 throw new Exception("TextDisplay.Initialize was already called");
 
             CharacterWidth = characterWidth;
             CharacterHeight = characterHeight;
 
-            palette = new Image(Path.Combine(dataFolder, "palette.png"));
+            paletteFile = Path.Combine(dataFolder, "palette.png");
 
             fontTexture = new Texture(Path.Combine(dataFolder, "font.png"));
 

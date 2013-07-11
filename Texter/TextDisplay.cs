@@ -8,16 +8,17 @@ namespace Texter
     {
         Image data;
         Texture dataTexture;
+        Image palette;
+        Texture paletteTexture;
 
         RenderTexture display;
-        Texture paletteTexture;
         Shader renderer;
 
         Color color = new Color(0, 0, 0);
 
         public TextDisplay(uint width, uint height)
         {
-            if (palette == null)
+            if (fontTexture == null)
                 throw new Exception("TextDisplay.Initialize was not called");
 
             Width = width;
@@ -25,9 +26,10 @@ namespace Texter
 
             data = new Image(width, height, Color.Black);
             dataTexture = new Texture(data);
+            palette = new Image(paletteFile);
+            paletteTexture = new Texture(palette);
 
             display = new RenderTexture(width * CharacterWidth, height * CharacterHeight);
-            paletteTexture = new Texture(palette);
 
             renderer = Shader.FromString(displayVertexSource, displayFragmentSource);
             renderer.SetParameter("data", dataTexture);
@@ -41,7 +43,7 @@ namespace Texter
             paletteTexture.Update(palette);
             dataTexture.Update(data);
 
-            Sprite s = new Sprite(display.Texture);
+            var s = new Sprite(display.Texture);
             s.Position = position;
 
             renderTarget.Draw(s, new RenderStates(renderer));
