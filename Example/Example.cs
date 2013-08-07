@@ -41,6 +41,9 @@ namespace Example
                 // Clear the TextDisplay to a Character, this is not required but I do it anyways
                 example.Clear(Character.Blank);
 
+                // Lets leave a border to demo regions
+                var region = example.Region(1, 1, Width - 2, Height - 2);
+
                 // Render our fractal, I think I got this code from Wikipedia and added zooming
                 for (int y = 0; y < Height; y++)
                 {
@@ -74,8 +77,8 @@ namespace Example
                         double colorPercentage = (double)iteration / maxIteration;
                         byte color = (byte)(colorPercentage * 255);
 
-                        // Modifying the TextDisplay per Character
-                        example.Set(x, y, Character.Create(random.Next(255), color - 128, color));
+                        // Modifying the TextDisplay per Character, through a region
+                        region.Set(x, y, Character.Create(random.Next(255), color - 128, color));
                     }
                 }
 

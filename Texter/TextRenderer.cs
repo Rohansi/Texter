@@ -10,6 +10,11 @@ namespace Texter
         public abstract void Set(int x, int y, Character character, bool blend = true);
         public abstract Character Get(int x, int y);
 
+        public TextRegion Region(int x, int y, uint w, uint h)
+        {
+            return new TextRegion(this, x, y, w, h);
+        }
+
         public void Clear(Character character)
         {
             for (int y = 0; y < Height; y++)
