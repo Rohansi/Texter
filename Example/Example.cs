@@ -78,15 +78,15 @@ namespace Example
                         byte color = (byte)(colorPercentage * 255);
 
                         // Modifying the TextDisplay per Character, through a region
-                        region.Set(x, y, Character.Create(random.Next(255), color - 128, color));
+                        region.Set(x, y, new Character(random.Next(255), color - 128, color));
                     }
                 }
 
                 // Render a rectangle to contain our message
-                example.DrawRectangle(22, 10, 19, 5, Character.Create(' ', 128, 128), Character.Create('@', foreground: 255));
+                example.DrawRectangle(22, 10, 19, 5, new Character(' ', 128, 128), new Character('@', foreground: 255));
 
                 // And then we render our message onto the rectangle
-                example.DrawText(25, 12, "Hello, world!", Character.Create(foreground: 255));
+                example.DrawText(25, 12, "Hello, world!", new Character(foreground: 255));
 
                 // Render the TextDisplay to the SFML window
                 example.Draw(window, new Vector2f(0, 0));

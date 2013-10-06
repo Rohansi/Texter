@@ -6,50 +6,50 @@ namespace Texter
 {
     public partial class TextDisplay : TextRenderer
     {
-        Image data;
-        Texture dataTexture;
-        Image palette;
-        Texture paletteTexture;
+        Image _data;
+        Texture _dataTexture;
+        Image _palette;
+        Texture _paletteTexture;
 
-        RenderTexture display;
-        Shader renderer;
+        RenderTexture _display;
+        Shader _renderer;
 
-        Color color = new Color(0, 0, 0);
+        Color _color = new Color(0, 0, 0);
 
         public TextDisplay(uint width, uint height)
         {
-            if (fontTexture == null)
+            if (_fontTexture == null)
                 throw new Exception("TextDisplay.Initialize was not called");
 
             Width = width;
             Height = height;
 
-            data = new Image(width, height, Color.Black);
-            dataTexture = new Texture(data);
-            palette = new Image(paletteFile);
-            paletteTexture = new Texture(palette);
+            _data = new Image(width, height, Color.Black);
+            _dataTexture = new Texture(_data);
+            _palette = new Image(_paletteFile);
+            _paletteTexture = new Texture(_palette);
 
-            display = new RenderTexture(width * CharacterWidth, height * CharacterHeight);
+            _display = new RenderTexture(width * CharacterWidth, height * CharacterHeight);
 
-            renderer = Shader.FromString(displayVertexSource, displayFragmentSource);
-            renderer.SetParameter("data", dataTexture);
-            renderer.SetParameter("dataSize", width, height);
-            renderer.SetParameter("font", fontTexture);
-            renderer.SetParameter("palette", paletteTexture);
+            _renderer = Shader.FromString(_displayVertexSource, _displayFragmentSource);
+            _renderer.SetParameter("data", _dataTexture);
+            _renderer.SetParameter("dataSize", width, height);
+            _renderer.SetParameter("font", _fontTexture);
+            _renderer.SetParameter("palette", _paletteTexture);
         }
 
         public void Draw(RenderTarget renderTarget, Vector2f position)
         {
-            paletteTexture.Update(palette);
-            dataTexture.Update(data);
+            _paletteTexture.Update(_palette);
+            _dataTexture.Update(_data);
 
-            var s = new Sprite(display.Texture);
+            var s = new Sprite(_display.Texture);
             s.Position = position;
 
-            renderTarget.Draw(s, new RenderStates(renderer));
+            renderTarget.Draw(s, new RenderStates(_renderer));
         }
 
-        public override void Set(int x, int y, Character character, bool blend = true)
+        public override void Set(int x, int y, Character character)
         {
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return;
@@ -72,10 +72,10 @@ namespace Texter
                     back = ch.Background;
             }
 
-            color.R = (byte)glyph;
-            color.G = (byte)fore;
-            color.B = (byte)back;
-            data.SetPixel((uint)x, (uint)y, color);
+            _color.R = (byte)glyph;
+            _color.G = (byte)fore;
+            _color.B = (byte)back;
+            _data.SetPixel((uint)x, (uint)y, _color);
         }
 
         public override Character Get(int x, int y)
@@ -83,18 +83,18 @@ namespace Texter
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return Character.Blank;
 
-            Color p = data.GetPixel((uint)x, (uint)y);
-            return Character.Create(p.R, p.G, p.B);
+            Color p = _data.GetPixel((uint)x, (uint)y);
+            return new Character(p.R, p.G, p.B);
         }
 
         public void PaletteSet(byte index, Color color)
         {
-            palette.SetPixel(index, 0, color);
+            _palette.SetPixel(index, 0, color);
         }
 
         public Color PaletteGet(byte index)
         {
-            return palette.GetPixel(index, 0);
+            return _palette.GetPixel(index, 0);
         }
     }
 }

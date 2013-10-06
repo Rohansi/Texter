@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Texter
 {
     public class Character
     {
-        public static readonly Character Blank = Create(0, 0, 0);
+        public static readonly Character Blank = new Character(0, 0, 0);
 
         public int Glyph { get; private set; }
         public int Foreground { get; private set; }
@@ -21,7 +17,7 @@ namespace Texter
             }
         }
 
-        public static Character Create(int glyph = -1, int foreground = -1, int background = -1)
+        public Character(int glyph = -1, int foreground = -1, int background = -1)
         {
             if (glyph < byte.MinValue || glyph > byte.MaxValue)
                 glyph = -1;
@@ -32,17 +28,14 @@ namespace Texter
             if (background < byte.MinValue || background > byte.MaxValue)
                 background = -1;
 
-            return new Character
-            {
-                Glyph = glyph,
-                Foreground = foreground,
-                Background = background
-            };
+            Glyph = glyph;
+            Foreground = foreground;
+            Background = background;
         }
 
-        public static Character Create(char glyph, int foreground = -1, int background = -1)
+        public Character(char glyph, int foreground = -1, int background = -1)
+            : this((int)glyph, foreground, background)
         {
-            return Create((byte)glyph, foreground, background);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Texter
 {
     public abstract class TextRenderer
@@ -7,12 +6,17 @@ namespace Texter
         public uint Width { get; protected set; }
         public uint Height { get; protected set; }
 
-        public abstract void Set(int x, int y, Character character, bool blend = true);
+        public abstract void Set(int x, int y, Character character);
         public abstract Character Get(int x, int y);
 
         public TextRegion Region(int x, int y, uint w, uint h)
         {
             return new TextRegion(this, x, y, w, h);
+        }
+
+        public TextEffect Effect(TextEffect.Func effect)
+        {
+            return new TextEffect(this, effect);
         }
 
         public void Clear(Character character)
@@ -21,7 +25,7 @@ namespace Texter
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    Set(x, y, character, false);
+                    Set(x, y, character);
                 }
             }
         }
@@ -58,17 +62,12 @@ namespace Texter
         {
             foreach (char c in text)
             {
-                if (c == '\n')
-                {
-                    x = 0;
-                    y++;
-                    continue;
-                }
-
-                Set(x, y, Character.Create(c, color.Foreground, color.Background));
+                Set(x, y, new Character(c, color.Foreground, color.Background));
                 x++;
             }
         }
+
+        // TODO: drawtext with formatting characters
 
         public void DrawRectangle(int x, int y, uint w, uint h, Character fill, Character border = null)
         {

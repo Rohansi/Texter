@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Texter
 {
     public class TextRegion : TextRenderer
     {
-        private TextRenderer renderer;
-        private int xx;
-        private int yy;
+        private TextRenderer _renderer;
+        private int _startX;
+        private int _startY;
 
         internal TextRegion(TextRenderer renderer, int x, int y, uint w, uint h)
         {
-            this.renderer = renderer;
-            xx = x;
-            yy = y;
+            _renderer = renderer;
+            _startX = x;
+            _startY = y;
 
             Width = w;
             Height = h;
         }
 
-        public override void Set(int x, int y, Character character, bool blend = true)
+        public override void Set(int x, int y, Character character)
         {
             if (x < 0 || x > Width - 1 | y < 0 | y > Height - 1)
                 return;
 
-            renderer.Set(xx + x, yy + y, character, blend);
+            _renderer.Set(_startX + x, _startY + y, character);
         }
 
         public override Character Get(int x, int y)
@@ -34,7 +30,7 @@ namespace Texter
             if (x < 0 || x > Width - 1 | y < 0 | y > Height - 1)
                 return Character.Blank;
 
-            return renderer.Get(xx + x, yy + y);
+            return _renderer.Get(_startX + x, _startY + y);
         }
     }
 }

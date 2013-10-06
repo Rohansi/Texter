@@ -1,26 +1,25 @@
-﻿using System;
-
+﻿
 namespace Texter
 {
     public class TextImage : TextRenderer
     {
-        Character[,] data;
+        Character[,] _data;
 
         public TextImage(uint width, uint height)
         {
             Width = width;
             Height = height;
 
-            data = new Character[width, height];
+            _data = new Character[width, height];
             Clear(Character.Blank);
         }
 
-        public override void Set(int x, int y, Character character, bool blend = true)
+        public override void Set(int x, int y, Character character)
         {
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return;
 
-            if (blend && character.HasTransparentComponent)
+            if (character.HasTransparentComponent)
             {
                 int glyph = character.Glyph;
                 int fore = character.Foreground;
@@ -37,11 +36,11 @@ namespace Texter
                 if (back == -1)
                     back = ch.Background;
 
-                data[x, y] = Character.Create(glyph, fore, back);
+                _data[x, y] = new Character(glyph, fore, back);
             }
             else
             {
-                data[x, y] = character;
+                _data[x, y] = character;
             }
         }
 
@@ -50,7 +49,7 @@ namespace Texter
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return Character.Blank;
 
-            return data[x, y];
+            return _data[x, y];
         }
     }
 }
