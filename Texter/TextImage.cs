@@ -14,12 +14,12 @@ namespace Texter
             Clear(Character.Blank);
         }
 
-        public override void Set(int x, int y, Character character)
+        public override void Set(int x, int y, Character character, bool useBlending = true)
         {
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return;
 
-            if (character.HasTransparentComponent)
+            if (useBlending && character.HasTransparentComponent)
             {
                 int glyph = character.Glyph;
                 int fore = character.Foreground;

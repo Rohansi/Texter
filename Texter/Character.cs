@@ -4,6 +4,7 @@ namespace Texter
     public class Character
     {
         public static readonly Character Blank = new Character(0, 0, 0);
+        public static readonly Character Transparent = new Character();
 
         public int Glyph { get; private set; }
         public int Foreground { get; private set; }

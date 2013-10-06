@@ -17,12 +17,12 @@ namespace Texter
             Height = h;
         }
 
-        public override void Set(int x, int y, Character character)
+        public override void Set(int x, int y, Character character, bool useBlending = true)
         {
             if (x < 0 || x > Width - 1 | y < 0 | y > Height - 1)
                 return;
 
-            _renderer.Set(_startX + x, _startY + y, character);
+            _renderer.Set(_startX + x, _startY + y, character, useBlending);
         }
 
         public override Character Get(int x, int y)

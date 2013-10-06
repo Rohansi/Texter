@@ -63,7 +63,7 @@ namespace Texter
             renderTarget.Draw(s, new RenderStates(_renderer));
         }
 
-        public override void Set(int x, int y, Character character)
+        public override void Set(int x, int y, Character character, bool useBlending = true)
         {
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return;
@@ -74,16 +74,30 @@ namespace Texter
 
             if (character.HasTransparentComponent)
             {
-                Character ch = Get(x, y);
+                if (useBlending)
+                {
+                    Character ch = Get(x, y);
 
-                if (glyph == -1)
-                    glyph = ch.Glyph;
+                    if (glyph == -1)
+                        glyph = ch.Glyph;
 
-                if (fore == -1)
-                    fore = ch.Foreground;
+                    if (fore == -1)
+                        fore = ch.Foreground;
 
-                if (back == -1)
-                    back = ch.Background;
+                    if (back == -1)
+                        back = ch.Background;
+                }
+                else
+                {
+                    if (glyph == -1)
+                        glyph = 0;
+
+                    if (fore == -1)
+                        fore = 0;
+
+                    if (back == -1)
+                        back = 0;
+                }
             }
 
             _color.R = (byte)glyph;

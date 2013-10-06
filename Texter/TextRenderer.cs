@@ -6,7 +6,7 @@ namespace Texter
         public uint Width { get; protected set; }
         public uint Height { get; protected set; }
 
-        public abstract void Set(int x, int y, Character character);
+        public abstract void Set(int x, int y, Character character, bool useBlending = true);
         public abstract Character Get(int x, int y);
 
         public TextRegion Region(int x, int y, uint w, uint h)
@@ -25,7 +25,7 @@ namespace Texter
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    Set(x, y, character);
+                    Set(x, y, character, false);
                 }
             }
         }

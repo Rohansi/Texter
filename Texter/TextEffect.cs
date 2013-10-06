@@ -21,9 +21,9 @@ namespace Texter
             Height = _renderer.Height;
         }
 
-        public override void Set(int x, int y, Character character)
+        public override void Set(int x, int y, Character character, bool useBlending = true)
         {
-            _renderer.Set(x, y, _effect(x, y, character));
+            _renderer.Set(x, y, _effect(x, y, character), useBlending);
         }
 
         public override Character Get(int x, int y)
