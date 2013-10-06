@@ -15,14 +15,11 @@ namespace Example
 
         public Example()
         {
-            // Initialize Texter
-            TextDisplay.Initialize();
-
             // Create a TextDisplay to render onto our window
             example = new TextDisplay(Width, Height);
 
             // Setup an SFML window
-            window = new RenderWindow(new VideoMode(Width * TextDisplay.CharacterWidth, Height * TextDisplay.CharacterHeight), "Texter Example", Styles.Close);
+            window = new RenderWindow(new VideoMode(Width * example.CharacterWidth, Height * example.CharacterHeight), "Texter Example", Styles.Close);
             window.SetFramerateLimit(60);
             window.Closed += (sender, e) => window.Close();
         }

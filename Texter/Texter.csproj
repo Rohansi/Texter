@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="Character.cs" />
     <Compile Include="TextDisplay.cs" />
-    <Compile Include="TextDisplay.Static.cs" />
     <Compile Include="TextEffect.cs" />
     <Compile Include="TextImage.cs" />
     <Compile Include="TextRegion.cs" />

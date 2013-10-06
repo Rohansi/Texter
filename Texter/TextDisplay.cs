@@ -1,13 +1,16 @@
-﻿using System;
+﻿using System.IO;
 using SFML.Graphics;
 using SFML.Window;
 
 namespace Texter
 {
-    public partial class TextDisplay : TextRenderer
+    public class TextDisplay : TextRenderer
     {
+        public static string DataFolder = "Data/";
+        
         Image _data;
         Texture _dataTexture;
+        Texture _fontTexture;
         Image _palette;
         Texture _paletteTexture;
 
@@ -16,22 +19,33 @@ namespace Texter
 
         Color _color = new Color(0, 0, 0);
 
-        public TextDisplay(uint width, uint height)
-        {
-            if (_fontTexture == null)
-                throw new Exception("TextDisplay.Initialize was not called");
+        public uint CharacterWidth { get; private set; }
+        public uint CharacterHeight { get; private set; }
 
+        public TextDisplay(uint width, uint height, string fontFile = "font.png", uint characterWidth = 8, uint characterHeight = 12, string paletteFile = "palette.png")
+        {
             Width = width;
             Height = height;
 
+            CharacterWidth = characterWidth;
+            CharacterHeight = characterHeight;
+
             _data = new Image(width, height, Color.Black);
             _dataTexture = new Texture(_data);
-            _palette = new Image(_paletteFile);
+
+            _fontTexture = new Texture(Path.Combine(DataFolder, fontFile));
+
+            _palette = new Image(Path.Combine(DataFolder, paletteFile));
             _paletteTexture = new Texture(_palette);
 
             _display = new RenderTexture(width * CharacterWidth, height * CharacterHeight);
 
-            _renderer = Shader.FromString(_displayVertexSource, _displayFragmentSource);
+            var displayVertexSource = File.ReadAllText(Path.Combine(DataFolder, "texter.vert"));
+            var displayFragmentSource = File.ReadAllText(Path.Combine(DataFolder, "texter.frag"))
+                    .Replace("#W#", CharacterWidth.ToString("D"))
+                    .Replace("#H#", CharacterHeight.ToString("D"));
+
+            _renderer = Shader.FromString(displayVertexSource, displayFragmentSource);
             _renderer.SetParameter("data", _dataTexture);
             _renderer.SetParameter("dataSize", width, height);
             _renderer.SetParameter("font", _fontTexture);
