@@ -28,7 +28,7 @@ void main() {
     vec2 fnPos = vec2(floor(mod(ch, fontSizeC.x)) * charSize.x,
                       floor(ch / fontSizeC.y) * charSize.y);
     
-    vec2 offset = vec2(mod(floor(gl_TexCoord[0].x * (dataSize.x * charSize.x)), charSize.x), 
+    vec2 offset = vec2(mod(floor(gl_TexCoord[0].x * (dataSize.x * charSize.x)), charSize.x),
                        mod(floor(gl_TexCoord[0].y * (dataSize.y * charSize.y)), charSize.y));
     
     vec4 fnCol = texelGet(font, fontSize - 1.0, fnPos + offset);
@@ -36,5 +36,5 @@ void main() {
     vec4 foreCol = texelGet(palette, vec2(255.0, 1.0), vec2(floor(chData.g * 255.0), 0.0));
     vec4 backCol = texelGet(palette, vec2(255.0, 1.0), vec2(floor(chData.b * 255.0), 0.0));
 
-    gl_FragColor = fnCol.r * foreCol + (1.0 - fnCol.r) * backCol;
+    gl_FragColor = fnCol * foreCol + (1.0 - fnCol) * backCol;
 }
