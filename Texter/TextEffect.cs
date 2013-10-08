@@ -23,6 +23,29 @@ namespace Texter
 
         public override void Set(int x, int y, Character character, bool useBlending = true)
         {
+            if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
+                return;
+
+            if (useBlending && character.HasTransparentComponent)
+            {
+                int glyph = character.Glyph;
+                int fore = character.Foreground;
+                int back = character.Background;
+
+                Character ch = Get(x, y);
+
+                if (glyph == -1)
+                    glyph = ch.Glyph;
+
+                if (fore == -1)
+                    fore = ch.Foreground;
+
+                if (back == -1)
+                    back = ch.Background;
+
+                character = new Character(glyph, fore, back);
+            }
+
             _renderer.Set(x, y, _effect(x, y, character), useBlending);
         }
 

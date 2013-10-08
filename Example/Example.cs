@@ -7,8 +7,8 @@ namespace Example
 {
     class Example
     {
-        const int Width = 160;
-        const int Height = 60;
+        const int Width = 80;
+        const int Height = 25;
 
         TextDisplay example;
         RenderWindow window;
@@ -53,8 +53,8 @@ namespace Example
                         double y0 = (posY * 2.0) - 1;
 
                         // Zooming
-                        x0 /= 1 + Math.Sin(time) * 1;
-                        y0 /= 1 + Math.Sin(time) * 1;
+                        x0 /= 1.5f + Math.Sin(time) * 0.5f;
+                        y0 /= 1.5f + Math.Sin(time) * 0.5f;
 
                         double xx = 0;
                         double yy = 0;
@@ -79,11 +79,14 @@ namespace Example
                     }
                 }
 
-                // Render a rectangle to contain our message
-                example.DrawRectangle(22, 10, 19, 5, new Character(' ', 128, 128), new Character('@', foreground: 255));
+                // Effect that brightens the background color
+                var effect = example.Effect((x, y, c) => new Character(c.Glyph, c.Foreground, Math.Max(c.Background - 128, 0)));
 
-                // And then we render our message onto the rectangle
-                example.DrawText(25, 12, "Hello, world!", new Character(foreground: 255));
+                // Render a box with our effect
+                effect.DrawBox(2, 2, 19, 5, TextRenderer.SingleBox, new Character(foreground: 255));
+
+                // And then we render our message onto the box
+                example.DrawText(5, 4, "Hello, world!", new Character(foreground: 255));
 
                 // Render the TextDisplay to the SFML window
                 example.Draw(window, new Vector2f(0, 0));
