@@ -23,7 +23,7 @@ void main() {
     // b - background color
     vec4 chData = texelGet(data, dataSize - 1.0, chPos);
     
-    float ch = floor(chData.r * 255.0);
+    float ch = floor(chData.r * 256.0);
     
     vec2 fnPos = vec2(floor(mod(ch, fontSizeC.x)) * charSize.x,
                       floor(ch / fontSizeC.y) * charSize.y);
