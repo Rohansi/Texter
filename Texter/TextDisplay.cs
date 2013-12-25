@@ -15,6 +15,7 @@ namespace Texter
         Texture _paletteTexture;
 
         RenderTexture _display;
+        Sprite _displaySprite;
         Shader _renderer;
 
         Color _color = new Color(0, 0, 0);
@@ -38,7 +39,10 @@ namespace Texter
             _palette = new Image(Path.Combine(DataFolder, paletteFile));
             _paletteTexture = new Texture(_palette);
 
+            // TODO: get rid of this useless texture
             _display = new RenderTexture(width * CharacterWidth, height * CharacterHeight);
+
+            _displaySprite = new Sprite(_display.Texture);
 
             var displayVertexSource = File.ReadAllText(Path.Combine(DataFolder, "texter.vert"));
             var displayFragmentSource = File.ReadAllText(Path.Combine(DataFolder, "texter.frag"))
@@ -57,10 +61,8 @@ namespace Texter
             _paletteTexture.Update(_palette);
             _dataTexture.Update(_data);
 
-            var s = new Sprite(_display.Texture);
-            s.Position = position;
-
-            renderTarget.Draw(s, new RenderStates(_renderer));
+            _displaySprite.Position = position;
+            renderTarget.Draw(_displaySprite, new RenderStates(_renderer));
         }
 
         public override void Set(int x, int y, Character character, bool useBlending = true)

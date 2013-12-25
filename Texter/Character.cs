@@ -1,14 +1,14 @@
 ﻿
 namespace Texter
 {
-    public class Character
+    public struct Character
     {
         public static readonly Character Blank = new Character(0, 0, 0);
         public static readonly Character Transparent = new Character();
 
-        public int Glyph { get; private set; }
-        public int Foreground { get; private set; }
-        public int Background { get; private set; }
+        public readonly int Glyph;
+        public readonly int Foreground;
+        public readonly int Background;
 
         public bool HasTransparentComponent
         {
