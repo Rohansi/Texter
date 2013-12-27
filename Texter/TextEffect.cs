@@ -2,14 +2,17 @@
 
 namespace Texter
 {
-    public class TextEffect : TextRenderer
+    public class TextEffect : ITextRenderer
     {
         public delegate Character Func(int x, int y, Character input);
-        
-        private TextRenderer _renderer;
+
+        public uint Width { get; private set; }
+        public uint Height { get; private set; }
+
+        private ITextRenderer _renderer;
         private Func _effect;
 
-        internal TextEffect(TextRenderer renderer, Func effect)
+        internal TextEffect(ITextRenderer renderer, Func effect)
         {
             _renderer = renderer;
             _effect = effect;
@@ -21,7 +24,7 @@ namespace Texter
             Height = _renderer.Height;
         }
 
-        public override void Set(int x, int y, Character character, bool useBlending = true)
+        public void Set(int x, int y, Character character, bool useBlending = true)
         {
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return;
@@ -49,7 +52,7 @@ namespace Texter
             _renderer.Set(x, y, _effect(x, y, character), useBlending);
         }
 
-        public override Character Get(int x, int y)
+        public Character Get(int x, int y)
         {
             return _renderer.Get(x, y);
         }

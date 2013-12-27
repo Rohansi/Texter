@@ -1,9 +1,12 @@
 ﻿
 namespace Texter
 {
-    public class TextImage : TextRenderer
+    public class TextImage : ITextRenderer
     {
-        Character[,] _data;
+        public uint Width { get; private set; }
+        public uint Height { get; private set; }
+
+        private Character[,] _data;
 
         public TextImage(uint width, uint height)
         {
@@ -11,10 +14,10 @@ namespace Texter
             Height = height;
 
             _data = new Character[width, height];
-            Clear(Character.Blank);
+            this.Clear(Character.Blank);
         }
 
-        public override void Set(int x, int y, Character character, bool useBlending = true)
+        public void Set(int x, int y, Character character, bool useBlending = true)
         {
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return;
@@ -44,7 +47,7 @@ namespace Texter
             }
         }
 
-        public override Character Get(int x, int y)
+        public Character Get(int x, int y)
         {
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return Character.Blank;

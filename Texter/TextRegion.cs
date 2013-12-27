@@ -1,13 +1,16 @@
 ﻿
 namespace Texter
 {
-    public class TextRegion : TextRenderer
+    public class TextRegion : ITextRenderer
     {
-        private TextRenderer _renderer;
+        public uint Width { get; private set; }
+        public uint Height { get; private set; }
+
+        private ITextRenderer _renderer;
         private int _startX;
         private int _startY;
 
-        internal TextRegion(TextRenderer renderer, int x, int y, uint w, uint h)
+        internal TextRegion(ITextRenderer renderer, int x, int y, uint w, uint h)
         {
             _renderer = renderer;
             _startX = x;
@@ -17,7 +20,7 @@ namespace Texter
             Height = h;
         }
 
-        public override void Set(int x, int y, Character character, bool useBlending = true)
+        public void Set(int x, int y, Character character, bool useBlending = true)
         {
             if (x < 0 || x > Width - 1 | y < 0 | y > Height - 1)
                 return;
@@ -25,7 +28,7 @@ namespace Texter
             _renderer.Set(_startX + x, _startY + y, character, useBlending);
         }
 
-        public override Character Get(int x, int y)
+        public Character Get(int x, int y)
         {
             if (x < 0 || x > Width - 1 | y < 0 | y > Height - 1)
                 return Character.Blank;

@@ -10,36 +10,36 @@ namespace Example
         const int Width = 80;
         const int Height = 25;
 
-        TextDisplay example;
-        RenderWindow window;
+        private TextDisplay _example;
+        private RenderWindow _window;
 
         public Example()
         {
             // Create a TextDisplay to render onto our window
-            example = new TextDisplay(Width, Height);
+            _example = new TextDisplay(Width, Height);
 
             // Setup an SFML window
-            window = new RenderWindow(new VideoMode(Width * example.CharacterWidth, Height * example.CharacterHeight), "Texter Example", Styles.Close);
-            window.SetFramerateLimit(60);
-            window.Closed += (sender, e) => window.Close();
+            _window = new RenderWindow(new VideoMode(Width * _example.CharacterWidth, Height * _example.CharacterHeight), "Texter Example", Styles.Close);
+            _window.SetFramerateLimit(60);
+            _window.Closed += (sender, e) => _window.Close();
         }
 
         public void Run()
         {
             double time = 0;
-            Random random = new Random();
+            var random = new Random();
 
-            while (window.IsOpen())
+            while (_window.IsOpen())
             {
                 // Normal SFML stuff
-                window.DispatchEvents();
-                window.Clear(Color.White);
+                _window.DispatchEvents();
+                _window.Clear(Color.White);
 
                 // Clear the TextDisplay to a Character, this is not required but I do it anyways
-                example.Clear(Character.Blank);
+                _example.Clear(Character.Blank);
 
                 // Lets leave a border to demo regions
-                var region = example.Region(1, 1, Width - 2, Height - 2);
+                var region = _example.Region(1, 1, Width - 2, Height - 2);
 
                 // Render our fractal, I think I got this code from Wikipedia and added zooming
                 for (int y = 0; y < Height; y++)
@@ -80,19 +80,19 @@ namespace Example
                 }
 
                 // Effect that brightens the background color
-                var effect = example.Effect((x, y, c) => new Character(c.Glyph, c.Foreground, Math.Max(c.Background - 128, 0)));
+                var effect = _example.Effect((x, y, c) => new Character(c.Glyph, c.Foreground, Math.Max(c.Background - 128, 0)));
 
                 // Render a box with our effect
-                effect.DrawBox(2, 2, 19, 5, TextRenderer.SingleBox, new Character(foreground: 255));
+                effect.DrawBox(2, 2, 19, 5, TextExtensions.SingleBox, new Character(foreground: 255));
 
                 // And then we render our message onto the box
-                example.DrawText(5, 4, "Hello, world!", new Character(foreground: 255));
+                _example.DrawText(5, 4, "Hello, world!", new Character(foreground: 255));
 
                 // Render the TextDisplay to the SFML window
-                example.Draw(window, new Vector2f(0, 0));
+                _example.Draw(_window);
 
                 // And finally have SFML display it to us
-                window.Display();
+                _window.Display();
 
                 time += 0.1;
             }

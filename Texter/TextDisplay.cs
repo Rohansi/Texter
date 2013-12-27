@@ -1,24 +1,26 @@
 ﻿using System.IO;
 using SFML.Graphics;
-using SFML.Window;
 
 namespace Texter
 {
-    public class TextDisplay : TextRenderer
+    public class TextDisplay : Transformable, ITextRenderer
     {
         public static string DataFolder = "Data/";
-        
-        Image _data;
-        Texture _dataTexture;
-        Texture _fontTexture;
-        Image _palette;
-        Texture _paletteTexture;
 
-        RenderTexture _display;
-        Sprite _displaySprite;
-        Shader _renderer;
+        public uint Width { get; private set; }
+        public uint Height { get; private set; }
 
-        Color _color = new Color(0, 0, 0);
+        private Image _data;
+        private Texture _dataTexture;
+        private Texture _fontTexture;
+        private Image _palette;
+        private Texture _paletteTexture;
+
+        private RenderTexture _display;
+        private Sprite _displaySprite;
+        private Shader _renderer;
+
+        private Color _color = new Color(0, 0, 0);
 
         public uint CharacterWidth { get; private set; }
         public uint CharacterHeight { get; private set; }
@@ -56,16 +58,15 @@ namespace Texter
             _renderer.SetParameter("palette", _paletteTexture);
         }
 
-        public void Draw(RenderTarget renderTarget, Vector2f position)
+        public void Draw(RenderTarget renderTarget)
         {
             _paletteTexture.Update(_palette);
             _dataTexture.Update(_data);
 
-            _displaySprite.Position = position;
-            renderTarget.Draw(_displaySprite, new RenderStates(_renderer));
+            renderTarget.Draw(_displaySprite, new RenderStates(BlendMode.Alpha, Transform, null, _renderer));
         }
 
-        public override void Set(int x, int y, Character character, bool useBlending = true)
+        public void Set(int x, int y, Character character, bool useBlending = true)
         {
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return;
@@ -108,7 +109,7 @@ namespace Texter
             _data.SetPixel((uint)x, (uint)y, _color);
         }
 
-        public override Character Get(int x, int y)
+        public Character Get(int x, int y)
         {
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return Character.Blank;

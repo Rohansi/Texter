@@ -33,8 +33,8 @@ void main() {
     
     vec4 fnCol = texelGet(font, fontSize - 1.0, fnPos + offset);
     
-    vec4 foreCol = texelGet(palette, vec2(255.0, 1.0), vec2(floor(chData.g * 255.0), 0.0));
-    vec4 backCol = texelGet(palette, vec2(255.0, 1.0), vec2(floor(chData.b * 255.0), 0.0));
+    vec4 foreCol = texelGet(palette, vec2(256.0, 1.0), vec2(floor(chData.g * 256.0), 0.0));
+    vec4 backCol = texelGet(palette, vec2(256.0, 1.0), vec2(floor(chData.b * 256.0), 0.0));
 
     gl_FragColor = fnCol * foreCol + (1.0 - fnCol) * backCol;
 }
