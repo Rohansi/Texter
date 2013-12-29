@@ -3,7 +3,7 @@ using SFML.Graphics;
 
 namespace Texter
 {
-    public class TextDisplay : Transformable, ITextRenderer
+    public class TextDisplay : Transformable, Drawable, ITextRenderer
     {
         public static string DataFolder = "Data/";
 
@@ -58,12 +58,15 @@ namespace Texter
             _renderer.SetParameter("palette", _paletteTexture);
         }
 
-        public void Draw(RenderTarget renderTarget)
+        public void Draw(RenderTarget target, RenderStates states)
         {
             _paletteTexture.Update(_palette);
             _dataTexture.Update(_data);
 
-            renderTarget.Draw(_displaySprite, new RenderStates(BlendMode.Alpha, Transform, null, _renderer));
+            states.Transform *= Transform;
+            states.Shader = _renderer;
+
+            target.Draw(_displaySprite, states);
         }
 
         public void Set(int x, int y, Character character, bool useBlending = true)

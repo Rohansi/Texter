@@ -89,7 +89,7 @@ namespace Example
                 _example.DrawText(5, 4, "Hello, world!", new Character(foreground: 255));
 
                 // Render the TextDisplay to the SFML window
-                _example.Draw(_window);
+                _window.Draw(_example);
 
                 // And finally have SFML display it to us
                 _window.Display();
