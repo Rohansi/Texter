@@ -25,13 +25,13 @@ namespace Texter
         /// <summary>
         /// Clear the renderer to a character.
         /// </summary>
-        public static void Clear(this ITextRenderer renderer, Character character)
+        public static void Clear(this ITextRenderer renderer, Character character, bool useBlending = false)
         {
             for (int y = 0; y < renderer.Height; y++)
             {
                 for (int x = 0; x < renderer.Width; x++)
                 {
-                    renderer.Set(x, y, character, false);
+                    renderer.Set(x, y, character, useBlending);
                 }
             }
         }

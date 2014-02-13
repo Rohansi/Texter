@@ -25,18 +25,18 @@ namespace Texter
         public uint CharacterWidth { get; private set; }
         public uint CharacterHeight { get; private set; }
 
-        public TextDisplay(uint width, uint height, string fontFile = "font.png", uint characterWidth = 8, uint characterHeight = 12, string paletteFile = "palette.png")
+        public TextDisplay(uint width, uint height, string fontFile = "font.png", string paletteFile = "palette.png")
         {
             Width = width;
             Height = height;
-
-            CharacterWidth = characterWidth;
-            CharacterHeight = characterHeight;
 
             _data = new Image(width, height, Color.Black);
             _dataTexture = new Texture(_data);
 
             _fontTexture = new Texture(Path.Combine(DataFolder, fontFile));
+
+            CharacterWidth = _fontTexture.Size.X / 16;
+            CharacterHeight = _fontTexture.Size.Y / 16;
 
             _palette = new Image(Path.Combine(DataFolder, paletteFile));
             _paletteTexture = new Texture(_palette);
@@ -129,6 +129,19 @@ namespace Texter
         public Color PaletteGet(byte index)
         {
             return _palette.GetPixel(index, 0);
+        }
+
+        public new void Dispose()
+        {
+            _data.Dispose();
+            _dataTexture.Dispose();
+            _fontTexture.Dispose();
+            _palette.Dispose();
+            _paletteTexture.Dispose();
+            _display.Dispose();
+            _renderer.Dispose();
+
+            base.Dispose();
         }
     }
 }
