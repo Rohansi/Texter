@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using SFML.Graphics;
+using SFML.Window;
 
 namespace Texter
 {
@@ -16,8 +17,7 @@ namespace Texter
         private Image _palette;
         private Texture _paletteTexture;
 
-        private RenderTexture _display;
-        private Sprite _displaySprite;
+        private VertexArray _display;
         private Shader _renderer;
 
         private Color _color = new Color(0, 0, 0);
@@ -41,10 +41,11 @@ namespace Texter
             _palette = new Image(Path.Combine(DataFolder, paletteFile));
             _paletteTexture = new Texture(_palette);
 
-            // TODO: get rid of this useless texture
-            _display = new RenderTexture(width * CharacterWidth, height * CharacterHeight);
-
-            _displaySprite = new Sprite(_display.Texture);
+            _display = new VertexArray(PrimitiveType.Quads, 4);
+            _display[0] = new Vertex(new Vector2f(0, 0), new Vector2f(0, 0));
+            _display[1] = new Vertex(new Vector2f(width * CharacterWidth, 0), new Vector2f(1, 0));
+            _display[2] = new Vertex(new Vector2f(width * CharacterWidth, height * CharacterHeight), new Vector2f(1, 1));
+            _display[3] = new Vertex(new Vector2f(0, height * CharacterHeight), new Vector2f(0, 1));
 
             var displayVertexSource = File.ReadAllText(Path.Combine(DataFolder, "texter.vert"));
             var displayFragmentSource = File.ReadAllText(Path.Combine(DataFolder, "texter.frag"))
@@ -66,7 +67,7 @@ namespace Texter
             states.Transform *= Transform;
             states.Shader = _renderer;
 
-            target.Draw(_displaySprite, states);
+            target.Draw(_display, states);
         }
 
         public void Set(int x, int y, Character character, bool useBlending = true)

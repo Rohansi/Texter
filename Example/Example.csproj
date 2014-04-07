@@ -56,20 +56,24 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\font.png">
+    <Content Include="..\Texter\Data\font.png">
+      <Link>Data\font.png</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\palette.png">
+    <Content Include="..\Texter\Data\palette.png">
+      <Link>Data\palette.png</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\texter.frag">
+    <Content Include="..\Texter\Data\texter.frag">
+      <Link>Data\texter.frag</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\texter.vert">
+    </Content>
+    <Content Include="..\Texter\Data\texter.vert">
+      <Link>Data\texter.vert</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
