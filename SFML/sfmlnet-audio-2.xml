@@ -59,18 +59,6 @@
             Stop the music
             </summary>
         </member>
-        <member name="M:SFML.Audio.Music.ToString">
-            <summary>
-            Provide a string describing the object
-            </summary>
-            <returns>String description of the object</returns>
-        </member>
-        <member name="M:SFML.Audio.Music.Destroy(System.Boolean)">
-            <summary>
-            Handle the destruction of the object
-            </summary>
-            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        </member>
         <member name="P:SFML.Audio.Music.SampleRate">
             <summary>
             Samples rate, in samples per second
@@ -137,6 +125,18 @@
             Current playing position
             </summary>
         </member>
+        <member name="M:SFML.Audio.Music.ToString">
+            <summary>
+            Provide a string describing the object
+            </summary>
+            <returns>String description of the object</returns>
+        </member>
+        <member name="M:SFML.Audio.Music.Destroy(System.Boolean)">
+            <summary>
+            Handle the destruction of the object
+            </summary>
+            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
+        </member>
         <member name="T:SFML.Audio.SoundStatus">
             <summary>
             Enumeration of all possible sound states
@@ -188,18 +188,6 @@
             <summary>
             Stop the sound
             </summary>
-        </member>
-        <member name="M:SFML.Audio.Sound.ToString">
-            <summary>
-            Provide a string describing the object
-            </summary>
-            <returns>String description of the object</returns>
-        </member>
-        <member name="M:SFML.Audio.Sound.Destroy(System.Boolean)">
-            <summary>
-            Handle the destruction of the object
-            </summary>
-            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
         </member>
         <member name="P:SFML.Audio.Sound.SoundBuffer">
             <summary>
@@ -257,6 +245,18 @@
             The default value is 1
             </summary>
         </member>
+        <member name="M:SFML.Audio.Sound.ToString">
+            <summary>
+            Provide a string describing the object
+            </summary>
+            <returns>String description of the object</returns>
+        </member>
+        <member name="M:SFML.Audio.Sound.Destroy(System.Boolean)">
+            <summary>
+            Handle the destruction of the object
+            </summary>
+            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
+        </member>
         <member name="T:SFML.Audio.SoundBuffer">
             <summary>
             SoundBuffer is the low-level class for loading and manipulating
@@ -269,14 +269,14 @@
             Construct the sound buffer from a file
             </summary>
             <param name="filename">Path of the sound file to load</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Audio.SoundBuffer.#ctor(System.IO.Stream)">
             <summary>
             Load the sound buffer from a custom stream
             </summary>
             <param name="stream">Source stream to read from</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Audio.SoundBuffer.#ctor(System.Int16[],System.UInt32,System.UInt32)">
             <summary>
@@ -285,7 +285,7 @@
             <param name="samples">Array of samples</param>
             <param name="channelCount">Channel count</param>
             <param name="sampleRate">Sample rate</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Audio.SoundBuffer.#ctor(SFML.Audio.SoundBuffer)">
             <summary>
@@ -299,18 +299,6 @@
             </summary>
             <param name="filename">Path of the sound file to write</param>
             <returns>True if saving has been successful</returns>
-        </member>
-        <member name="M:SFML.Audio.SoundBuffer.ToString">
-            <summary>
-            Provide a string describing the object
-            </summary>
-            <returns>String description of the object</returns>
-        </member>
-        <member name="M:SFML.Audio.SoundBuffer.Destroy(System.Boolean)">
-            <summary>
-            Handle the destruction of the object
-            </summary>
-            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
         </member>
         <member name="P:SFML.Audio.SoundBuffer.SampleRate">
             <summary>
@@ -332,10 +320,51 @@
             Array of samples contained in the buffer
             </summary>
         </member>
+        <member name="M:SFML.Audio.SoundBuffer.ToString">
+            <summary>
+            Provide a string describing the object
+            </summary>
+            <returns>String description of the object</returns>
+        </member>
+        <member name="M:SFML.Audio.SoundBuffer.Destroy(System.Boolean)">
+            <summary>
+            Handle the destruction of the object
+            </summary>
+            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
+        </member>
         <member name="T:SFML.Audio.SoundBufferRecorder">
             <summary>
             Specialized SoundRecorder which saves the captured
             audio data into a sound buffer
+            </summary>
+        </member>
+        <member name="P:SFML.Audio.SoundBufferRecorder.SoundBuffer">
+            <summary>
+            Sound buffer containing the recorded data (invalid until the capture stops)
+            </summary>
+        </member>
+        <member name="M:SFML.Audio.SoundBufferRecorder.ToString">
+            <summary>
+            Provide a string describing the object
+            </summary>
+            <returns>String description of the object</returns>
+        </member>
+        <member name="M:SFML.Audio.SoundBufferRecorder.OnStart">
+            <summary>
+            Called when a new capture starts
+            </summary>
+            <returns>False to abort recording audio data, true to continue</returns>
+        </member>
+        <member name="M:SFML.Audio.SoundBufferRecorder.OnProcessSamples(System.Int16[])">
+            <summary>
+            Process a new chunk of recorded samples
+            </summary>
+            <param name="samples">Array of samples to process</param>
+            <returns>False to stop recording audio data, true to continue</returns>
+        </member>
+        <member name="M:SFML.Audio.SoundBufferRecorder.OnStop">
+            <summary>
+            Called when the current capture stops
             </summary>
         </member>
         <member name="T:SFML.Audio.SoundRecorder">
@@ -365,6 +394,17 @@
         <member name="M:SFML.Audio.SoundRecorder.Stop">
             <summary>
             Stop the capture
+            </summary>
+        </member>
+        <member name="P:SFML.Audio.SoundRecorder.SampleRate">
+            <summary>
+            Sample rate of the recorder, in samples per second
+            </summary>
+        </member>
+        <member name="P:SFML.Audio.SoundRecorder.IsAvailable">
+            <summary>
+            Tell if the system supports sound capture.
+            If not, this class won't be usable
             </summary>
         </member>
         <member name="M:SFML.Audio.SoundRecorder.ToString">
@@ -407,46 +447,6 @@
             <param name="userData">User data -- unused</param>
             <returns>False to stop recording audio data, true to continue</returns>
         </member>
-        <member name="P:SFML.Audio.SoundRecorder.SampleRate">
-            <summary>
-            Sample rate of the recorder, in samples per second
-            </summary>
-        </member>
-        <member name="P:SFML.Audio.SoundRecorder.IsAvailable">
-            <summary>
-            Tell if the system supports sound capture.
-            If not, this class won't be usable
-            </summary>
-        </member>
-        <member name="M:SFML.Audio.SoundBufferRecorder.ToString">
-            <summary>
-            Provide a string describing the object
-            </summary>
-            <returns>String description of the object</returns>
-        </member>
-        <member name="M:SFML.Audio.SoundBufferRecorder.OnStart">
-            <summary>
-            Called when a new capture starts
-            </summary>
-            <returns>False to abort recording audio data, true to continue</returns>
-        </member>
-        <member name="M:SFML.Audio.SoundBufferRecorder.OnProcessSamples(System.Int16[])">
-            <summary>
-            Process a new chunk of recorded samples
-            </summary>
-            <param name="samples">Array of samples to process</param>
-            <returns>False to stop recording audio data, true to continue</returns>
-        </member>
-        <member name="M:SFML.Audio.SoundBufferRecorder.OnStop">
-            <summary>
-            Called when the current capture stops
-            </summary>
-        </member>
-        <member name="P:SFML.Audio.SoundBufferRecorder.SoundBuffer">
-            <summary>
-            Sound buffer containing the recorded data (invalid until the capture stops)
-            </summary>
-        </member>
         <member name="T:SFML.Audio.SoundStream">
             <summary>
             SoundStream is a streamed sound, ie. samples are acquired
@@ -474,54 +474,6 @@
             <summary>
             Stop the sound stream
             </summary>
-        </member>
-        <member name="M:SFML.Audio.SoundStream.ToString">
-            <summary>
-            Provide a string describing the object
-            </summary>
-            <returns>String description of the object</returns>
-        </member>
-        <member name="M:SFML.Audio.SoundStream.Initialize(System.UInt32,System.UInt32)">
-            <summary>
-            Set the audio stream parameters, you must call it before Play()
-            </summary>
-            <param name="channelCount">Number of channels</param>
-            <param name="sampleRate">Sample rate, in samples per second</param>
-        </member>
-        <member name="M:SFML.Audio.SoundStream.OnGetData(System.Int16[]@)">
-            <summary>
-            Virtual function called each time new audio data is needed to feed the stream
-            </summary>
-            <param name="samples">Array of samples to fill for the stream</param>
-            <returns>True to continue playback, false to stop</returns>
-        </member>
-        <member name="M:SFML.Audio.SoundStream.OnSeek(System.TimeSpan)">
-            <summary>
-            Virtual function called to seek into the stream
-            </summary>
-            <param name="timeOffset">New position</param>
-        </member>
-        <member name="M:SFML.Audio.SoundStream.Destroy(System.Boolean)">
-            <summary>
-            Handle the destruction of the object
-            </summary>
-            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        </member>
-        <member name="M:SFML.Audio.SoundStream.GetData(SFML.Audio.SoundStream.Chunk@,System.IntPtr)">
-            <summary>
-            Called each time new audio data is needed to feed the stream
-            </summary>
-            <param name="dataChunk">Data chunk to fill with new audio samples</param>
-            <param name="userData">User data -- unused</param>
-            <returns>True to continue playback, false to stop</returns>
-        </member>
-        <member name="M:SFML.Audio.SoundStream.Seek(System.Int64,System.IntPtr)">
-            <summary>
-            Called to seek in the stream
-            </summary>
-            <param name="timeOffset">New position</param>
-            <param name="userData">User data -- unused</param>
-            <returns>If false is returned, the playback is aborted</returns>
         </member>
         <member name="P:SFML.Audio.SoundStream.SampleRate">
             <summary>
@@ -584,10 +536,58 @@
             Current playing position
             </summary>
         </member>
+        <member name="M:SFML.Audio.SoundStream.ToString">
+            <summary>
+            Provide a string describing the object
+            </summary>
+            <returns>String description of the object</returns>
+        </member>
+        <member name="M:SFML.Audio.SoundStream.Initialize(System.UInt32,System.UInt32)">
+            <summary>
+            Set the audio stream parameters, you must call it before Play()
+            </summary>
+            <param name="channelCount">Number of channels</param>
+            <param name="sampleRate">Sample rate, in samples per second</param>
+        </member>
+        <member name="M:SFML.Audio.SoundStream.OnGetData(System.Int16[]@)">
+            <summary>
+            Virtual function called each time new audio data is needed to feed the stream
+            </summary>
+            <param name="samples">Array of samples to fill for the stream</param>
+            <returns>True to continue playback, false to stop</returns>
+        </member>
+        <member name="M:SFML.Audio.SoundStream.OnSeek(System.TimeSpan)">
+            <summary>
+            Virtual function called to seek into the stream
+            </summary>
+            <param name="timeOffset">New position</param>
+        </member>
+        <member name="M:SFML.Audio.SoundStream.Destroy(System.Boolean)">
+            <summary>
+            Handle the destruction of the object
+            </summary>
+            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
+        </member>
         <member name="T:SFML.Audio.SoundStream.Chunk">
             <summary>
             Structure mapping the C library arguments passed to the data callback
             </summary>
+        </member>
+        <member name="M:SFML.Audio.SoundStream.GetData(SFML.Audio.SoundStream.Chunk@,System.IntPtr)">
+            <summary>
+            Called each time new audio data is needed to feed the stream
+            </summary>
+            <param name="dataChunk">Data chunk to fill with new audio samples</param>
+            <param name="userData">User data -- unused</param>
+            <returns>True to continue playback, false to stop</returns>
+        </member>
+        <member name="M:SFML.Audio.SoundStream.Seek(System.Int64,System.IntPtr)">
+            <summary>
+            Called to seek in the stream
+            </summary>
+            <param name="timeOffset">New position</param>
+            <param name="userData">User data -- unused</param>
+            <returns>If false is returned, the playback is aborted</returns>
         </member>
         <member name="T:SFML.Audio.Vector3f">
             <summary>

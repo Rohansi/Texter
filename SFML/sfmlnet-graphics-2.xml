@@ -26,200 +26,6 @@
             Specialized shape representing a circle
             </summary>
         </member>
-        <member name="T:SFML.Graphics.Shape">
-            <summary>
-            Base class for textured shapes with outline
-            </summary>
-        </member>
-        <member name="T:SFML.Graphics.Transformable">
-            <summary>
-            Decomposed transform defined by a position, a rotation and a scale
-            </summary>
-        </member>
-        <member name="M:SFML.Graphics.Transformable.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:SFML.Graphics.Transformable.#ctor(SFML.Graphics.Transformable)">
-            <summary>
-            Construct the transformable from another transformable
-            </summary>
-            <param name="transformable">Transformable to copy</param>
-        </member>
-        <member name="M:SFML.Graphics.Transformable.#ctor(System.IntPtr)">
-            <summary>
-            Construct the object from its internal C pointer
-            </summary>
-            <param name="cPointer">Pointer to the object in the C library</param>
-        </member>
-        <member name="M:SFML.Graphics.Transformable.Destroy(System.Boolean)">
-            <summary>
-            Handle the destruction of the object
-            </summary>
-            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        </member>
-        <member name="P:SFML.Graphics.Transformable.Position">
-            <summary>
-            Position of the object
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Transformable.Rotation">
-            <summary>
-            Rotation of the object
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Transformable.Scale">
-            <summary>
-            Scale of the object
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Transformable.Origin">
-            <summary>
-            The origin of an object defines the center point for
-            all transformations (position, scale, rotation).
-            The coordinates of this point must be relative to the
-            top-left corner of the object, and ignore all
-            transformations (position, scale, rotation).
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Transformable.Transform">
-            <summary>
-            The combined transform of the object
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Transformable.InverseTransform">
-            <summary>
-            The combined transform of the object
-            </summary>
-        </member>
-        <member name="T:SFML.Graphics.Drawable">
-            <summary>
-            Interface for every object that can be drawn to a render window
-            </summary>
-        </member>
-        <member name="M:SFML.Graphics.Drawable.Draw(SFML.Graphics.RenderTarget,SFML.Graphics.RenderStates)">
-             <summmary>
-             Draw the object to a render target
-            
-             This is a pure virtual function that has to be implemented
-             by the derived class to define how the drawable should be
-             drawn.
-             </summmary>
-             <param name="target">Render target to draw to</param>
-             <param name="states">Current render states</param>
-        </member>
-        <member name="M:SFML.Graphics.Shape.GetPointCount">
-            <summary>
-            Get the total number of points of the shape
-            </summary>
-            <returns>The total point count</returns>
-        </member>
-        <member name="M:SFML.Graphics.Shape.GetPoint(System.UInt32)">
-             <summary>
-             Get a point of the shape.
-            
-             The result is undefined if index is out of the valid range.
-             </summary>
-             <param name="index">Index of the point to get, in range [0 .. PointCount - 1]</param>
-             <returns>Index-th point of the shape</returns>
-        </member>
-        <member name="M:SFML.Graphics.Shape.GetLocalBounds">
-             <summary>
-             Get the local bounding rectangle of the entity.
-            
-             The returned rectangle is in local coordinates, which means
-             that it ignores the transformations (translation, rotation,
-             scale, ...) that are applied to the entity.
-             In other words, this function returns the bounds of the
-             entity in the entity's coordinate system.
-             </summary>
-             <returns>Local bounding rectangle of the entity</returns>
-        </member>
-        <member name="M:SFML.Graphics.Shape.GetGlobalBounds">
-             <summary>
-             Get the global bounding rectangle of the entity.
-            
-             The returned rectangle is in global coordinates, which means
-             that it takes in account the transformations (translation,
-             rotation, scale, ...) that are applied to the entity.
-             In other words, this function returns the bounds of the
-             sprite in the global 2D world's coordinate system.
-             </summary>
-             <returns>Global bounding rectangle of the entity</returns>
-        </member>
-        <member name="M:SFML.Graphics.Shape.Draw(SFML.Graphics.RenderTarget,SFML.Graphics.RenderStates)">
-             <summmary>
-             Draw the object to a render target
-            
-             This is a pure virtual function that has to be implemented
-             by the derived class to define how the drawable should be
-             drawn.
-             </summmary>
-             <param name="target">Render target to draw to</param>
-             <param name="states">Current render states</param>
-        </member>
-        <member name="M:SFML.Graphics.Shape.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:SFML.Graphics.Shape.#ctor(SFML.Graphics.Shape)">
-            <summary>
-            Construct the shape from another shape
-            </summary>
-            <param name="copy">Shape to copy</param>
-        </member>
-        <member name="M:SFML.Graphics.Shape.Update">
-             <summary>
-             Recompute the internal geometry of the shape.
-            
-             This function must be called by the derived class everytime
-             the shape's points change (ie. the result of either
-             PointCount or GetPoint is different).
-             </summary>
-        </member>
-        <member name="M:SFML.Graphics.Shape.Destroy(System.Boolean)">
-            <summary>
-            Handle the destruction of the object
-            </summary>
-            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        </member>
-        <member name="M:SFML.Graphics.Shape.InternalGetPointCount(System.IntPtr)">
-            <summary>
-            Callback passed to the C API
-            </summary>
-        </member>
-        <member name="M:SFML.Graphics.Shape.InternalGetPoint(System.UInt32,System.IntPtr)">
-            <summary>
-            Callback passed to the C API
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Shape.Texture">
-            <summary>
-            Source texture of the shape
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Shape.TextureRect">
-            <summary>
-            Sub-rectangle of the texture that the shape will display
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Shape.FillColor">
-            <summary>
-            Fill color of the shape
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Shape.OutlineColor">
-            <summary>
-            Outline color of the shape
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Shape.OutlineThickness">
-            <summary>
-            Thickness of the shape's outline
-            </summary>
-        </member>
         <member name="M:SFML.Graphics.CircleShape.#ctor">
             <summary>
             Default constructor
@@ -244,6 +50,11 @@
             </summary>
             <param name="copy">Shape to copy</param>
         </member>
+        <member name="P:SFML.Graphics.CircleShape.Radius">
+            <summary>
+            The radius of the shape
+            </summary>
+        </member>
         <member name="M:SFML.Graphics.CircleShape.GetPointCount">
             <summary>
             Get the total number of points of the shape
@@ -265,11 +76,6 @@
              </summary>
              <param name="index">Index of the point to get, in range [0 .. PointCount - 1]</param>
              <returns>Index-th point of the shape</returns>
-        </member>
-        <member name="P:SFML.Graphics.CircleShape.Radius">
-            <summary>
-            The radius of the shape
-            </summary>
         </member>
         <member name="T:SFML.Graphics.Color">
             <summary>
@@ -365,16 +171,16 @@
             </summary>
             <param name="active">True to activate, false to deactivate</param>
         </member>
+        <member name="P:SFML.Graphics.Context.Global">
+            <summary>
+            Global helper context
+            </summary>
+        </member>
         <member name="M:SFML.Graphics.Context.ToString">
             <summary>
             Provide a string describing the object
             </summary>
             <returns>String description of the object</returns>
-        </member>
-        <member name="P:SFML.Graphics.Context.Global">
-            <summary>
-            Global helper context
-            </summary>
         </member>
         <member name="T:SFML.Graphics.ConvexShape">
             <summary>
@@ -433,6 +239,22 @@
              <param name="index">Index of the point to change, in range [0 .. PointCount - 1]</param>
              <param name="point">New position of the point</param>
         </member>
+        <member name="T:SFML.Graphics.Drawable">
+            <summary>
+            Interface for every object that can be drawn to a render window
+            </summary>
+        </member>
+        <member name="M:SFML.Graphics.Drawable.Draw(SFML.Graphics.RenderTarget,SFML.Graphics.RenderStates)">
+             <summmary>
+             Draw the object to a render target
+            
+             This is a pure virtual function that has to be implemented
+             by the derived class to define how the drawable should be
+             drawn.
+             </summmary>
+             <param name="target">Render target to draw to</param>
+             <param name="states">Current render states</param>
+        </member>
         <member name="T:SFML.Graphics.Font">
             <summary>
             Font is the low-level class for loading and
@@ -445,14 +267,14 @@
             Construct the font from a file
             </summary>
             <param name="filename">Font file to load</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Font.#ctor(System.IO.Stream)">
             <summary>
             Construct the font from a custom stream
             </summary>
             <param name="stream">Source stream to read from</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Font.#ctor(SFML.Graphics.Font)">
             <summary>
@@ -536,7 +358,7 @@
             </summary>
             <param name="width">Image width</param>
             <param name="height">Image height</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Image.#ctor(System.UInt32,System.UInt32,SFML.Graphics.Color)">
             <summary>
@@ -545,28 +367,28 @@
             <param name="width">Image width</param>
             <param name="height">Image height</param>
             <param name="color">Color to fill the image with</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Image.#ctor(System.String)">
             <summary>
             Construct the image from a file
             </summary>
             <param name="filename">Path of the image file to load</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Image.#ctor(System.IO.Stream)">
             <summary>
             Construct the image from a file in a stream
             </summary>
             <param name="stream">Stream containing the file contents</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Image.#ctor(SFML.Graphics.Color[0:,0:])">
             <summary>
             Construct the image directly from an array of pixels
             </summary>
             <param name="pixels">2 dimensions array containing the pixels</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Image.#ctor(System.UInt32,System.UInt32,System.Byte[])">
             <summary>
@@ -575,7 +397,7 @@
             <param name="width">Image width</param>
             <param name="height">Image height</param>
             <param name="pixels">array containing the pixels</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Image.#ctor(SFML.Graphics.Image)">
             <summary>
@@ -652,6 +474,18 @@
             <param name="y">Y coordinate of pixel in the image</param>
             <param name="color">New color for pixel (x, y)</param>
         </member>
+        <member name="P:SFML.Graphics.Image.Pixels">
+            <summary>
+            Get a copy of the array of pixels (RGBA 8 bits integers components)
+            Array size is Width x Height x 4
+            </summary>
+            <returns>Array of pixels</returns>
+        </member>
+        <member name="P:SFML.Graphics.Image.Size">
+            <summary>
+            Size of the image, in pixels
+            </summary>
+        </member>
         <member name="M:SFML.Graphics.Image.FlipHorizontally">
             <summary>
             Flip the image horizontally
@@ -679,18 +513,6 @@
             Handle the destruction of the object
             </summary>
             <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        </member>
-        <member name="P:SFML.Graphics.Image.Pixels">
-            <summary>
-            Get a copy of the array of pixels (RGBA 8 bits integers components)
-            Array size is Width x Height x 4
-            </summary>
-            <returns>Array of pixels</returns>
-        </member>
-        <member name="P:SFML.Graphics.Image.Size">
-            <summary>
-            Size of the image, in pixels
-            </summary>
         </member>
         <member name="T:SFML.Graphics.PrimitiveType">
              <summary>
@@ -856,6 +678,11 @@
             </summary>
             <param name="copy">Shape to copy</param>
         </member>
+        <member name="P:SFML.Graphics.RectangleShape.Size">
+            <summary>
+            The size of the rectangle
+            </summary>
+        </member>
         <member name="M:SFML.Graphics.RectangleShape.GetPointCount">
             <summary>
             Get the total number of points of the shape
@@ -870,11 +697,6 @@
              </summary>
              <param name="index">Index of the point to get, in range [0 .. PointCount - 1]</param>
              <returns>Index-th point of the shape</returns>
-        </member>
-        <member name="P:SFML.Graphics.RectangleShape.Size">
-            <summary>
-            The size of the rectangle
-            </summary>
         </member>
         <member name="T:SFML.Graphics.RenderStates">
             <summary>
@@ -920,6 +742,9 @@
             </summary>
             <param name="copy">States to copy</param>
         </member>
+        <member name="P:SFML.Graphics.RenderStates.Default">
+            <summary>Special instance holding the default render states</summary>
+        </member>
         <member name="F:SFML.Graphics.RenderStates.BlendMode">
             <summary>Blending mode</summary>
         </member>
@@ -932,12 +757,19 @@
         <member name="F:SFML.Graphics.RenderStates.Shader">
             <summary>Shader</summary>
         </member>
-        <member name="P:SFML.Graphics.RenderStates.Default">
-            <summary>Special instance holding the default render states</summary>
-        </member>
         <member name="T:SFML.Graphics.RenderTarget">
             <summary>
             Abstract base class for render targets (renderwindow, renderimage)
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.RenderTarget.Size">
+            <summary>
+            Size of the rendering region of the target
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.RenderTarget.DefaultView">
+            <summary>
+            Default view of the target
             </summary>
         </member>
         <member name="M:SFML.Graphics.RenderTarget.GetView">
@@ -1150,16 +982,6 @@
              // OpenGL code here...
              </summary>
         </member>
-        <member name="P:SFML.Graphics.RenderTarget.Size">
-            <summary>
-            Size of the rendering region of the target
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.RenderTarget.DefaultView">
-            <summary>
-            Default view of the target
-            </summary>
-        </member>
         <member name="T:SFML.Graphics.RenderTexture">
             <summary>
             Target for off-screen 2D rendering into an texture
@@ -1188,6 +1010,16 @@
             </summary>
             <param name="active">True to activate, false to deactivate (true by default)</param>
             <returns>True if operation was successful, false otherwise</returns>
+        </member>
+        <member name="P:SFML.Graphics.RenderTexture.Size">
+            <summary>
+            Size of the rendering region of the render texture
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.RenderTexture.DefaultView">
+            <summary>
+            Default view of the render texture
+            </summary>
         </member>
         <member name="M:SFML.Graphics.RenderTexture.GetView">
             <summary>
@@ -1296,6 +1128,16 @@
         <member name="M:SFML.Graphics.RenderTexture.Display">
             <summary>
             Update the contents of the target texture
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.RenderTexture.Texture">
+            <summary>
+            Target texture of the render texture
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.RenderTexture.Smooth">
+            <summary>
+            Control the smooth filter
             </summary>
         </member>
         <member name="M:SFML.Graphics.RenderTexture.Draw(SFML.Graphics.Drawable)">
@@ -1416,26 +1258,6 @@
             </summary>
             <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
         </member>
-        <member name="P:SFML.Graphics.RenderTexture.Size">
-            <summary>
-            Size of the rendering region of the render texture
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.RenderTexture.DefaultView">
-            <summary>
-            Default view of the render texture
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.RenderTexture.Texture">
-            <summary>
-            Target texture of the render texture
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.RenderTexture.Smooth">
-            <summary>
-            Control the smooth filter
-            </summary>
-        </member>
         <member name="T:SFML.Graphics.RenderWindow">
             <summary>
             Simple wrapper for Window that allows easy
@@ -1499,6 +1321,21 @@
             Display the window on screen
             </summary>
         </member>
+        <member name="P:SFML.Graphics.RenderWindow.Settings">
+            <summary>
+            Creation settings of the window
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.RenderWindow.Position">
+            <summary>
+            Position of the window
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.RenderWindow.Size">
+            <summary>
+            Size of the rendering region of the window
+            </summary>
+        </member>
         <member name="M:SFML.Graphics.RenderWindow.SetTitle(System.String)">
             <summary>
             Change the title of the window
@@ -1558,6 +1395,16 @@
             no move event will be generated
             </summary>
             <param name="threshold">New threshold, in range [0, 100]</param>
+        </member>
+        <member name="P:SFML.Graphics.RenderWindow.SystemHandle">
+            <summary>
+            OS-specific handle of the window
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.RenderWindow.DefaultView">
+            <summary>
+            Default view of the window
+            </summary>
         </member>
         <member name="M:SFML.Graphics.RenderWindow.GetView">
             <summary>
@@ -1821,34 +1668,15 @@
             Do common initializations
             </summary>
         </member>
-        <member name="P:SFML.Graphics.RenderWindow.Settings">
-            <summary>
-            Creation settings of the window
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.RenderWindow.Position">
-            <summary>
-            Position of the window
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.RenderWindow.Size">
-            <summary>
-            Size of the rendering region of the window
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.RenderWindow.SystemHandle">
-            <summary>
-            OS-specific handle of the window
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.RenderWindow.DefaultView">
-            <summary>
-            Default view of the window
-            </summary>
-        </member>
         <member name="T:SFML.Graphics.Shader">
             <summary>
             Wrapper for pixel shaders
+            </summary>
+        </member>
+        <member name="T:SFML.Graphics.Shader.CurrentTextureType">
+            <summary>
+            Special type that can be passed to SetParameter,
+            and that represents the texture of the object being drawn
             </summary>
         </member>
         <member name="F:SFML.Graphics.Shader.CurrentTexture">
@@ -1871,7 +1699,7 @@
              </summary>
              <param name="vertexShaderFilename">Path of the vertex shader file to load, or null to skip this shader</param>
              <param name="fragmentShaderFilename">Path of the fragment shader file to load, or null to skip this shader</param>
-             <exception cref="T:SFML.LoadingFailedException"/>
+             <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Shader.#ctor(System.IO.Stream,System.IO.Stream)">
              <summary>
@@ -1887,7 +1715,7 @@
              </summary>
              <param name="vertexShaderStream">Source stream to read the vertex shader from, or null to skip this shader</param>
              <param name="fragmentShaderStream">Source stream to read the fragment shader from, or null to skip this shader</param>
-             <exception cref="T:SFML.LoadingFailedException"/>
+             <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Shader.FromString(System.String,System.String)">
              <summary>
@@ -1904,7 +1732,7 @@
              <param name="vertexShader">String containing the source code of the vertex shader</param>
              <param name="fragmentShader">String containing the source code of the fragment shader</param>
              <returns>New shader instance</returns>
-             <exception cref="T:SFML.LoadingFailedException"/>
+             <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Shader.SetParameter(System.String,System.Single)">
              <summary>
@@ -2029,6 +1857,15 @@
             </summary>
             <param name="shader">Shader to bind (can be null to use no shader)</param>
         </member>
+        <member name="P:SFML.Graphics.Shader.IsAvailable">
+             <summary>
+             Tell whether or not the system supports shaders.
+            
+             This property should always be checked before using
+             the shader features. If it returns false, then
+             any attempt to use Shader will fail.
+             </summary>
+        </member>
         <member name="M:SFML.Graphics.Shader.ToString">
             <summary>
             Provide a string describing the object
@@ -2047,19 +1884,120 @@
             </summary>
             <param name="ptr">Pointer to the shader instance</param>
         </member>
-        <member name="P:SFML.Graphics.Shader.IsAvailable">
+        <member name="T:SFML.Graphics.Shape">
+            <summary>
+            Base class for textured shapes with outline
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Shape.Texture">
+            <summary>
+            Source texture of the shape
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Shape.TextureRect">
+            <summary>
+            Sub-rectangle of the texture that the shape will display
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Shape.FillColor">
+            <summary>
+            Fill color of the shape
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Shape.OutlineColor">
+            <summary>
+            Outline color of the shape
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Shape.OutlineThickness">
+            <summary>
+            Thickness of the shape's outline
+            </summary>
+        </member>
+        <member name="M:SFML.Graphics.Shape.GetPointCount">
+            <summary>
+            Get the total number of points of the shape
+            </summary>
+            <returns>The total point count</returns>
+        </member>
+        <member name="M:SFML.Graphics.Shape.GetPoint(System.UInt32)">
              <summary>
-             Tell whether or not the system supports shaders.
+             Get a point of the shape.
             
-             This property should always be checked before using
-             the shader features. If it returns false, then
-             any attempt to use Shader will fail.
+             The result is undefined if index is out of the valid range.
+             </summary>
+             <param name="index">Index of the point to get, in range [0 .. PointCount - 1]</param>
+             <returns>Index-th point of the shape</returns>
+        </member>
+        <member name="M:SFML.Graphics.Shape.GetLocalBounds">
+             <summary>
+             Get the local bounding rectangle of the entity.
+            
+             The returned rectangle is in local coordinates, which means
+             that it ignores the transformations (translation, rotation,
+             scale, ...) that are applied to the entity.
+             In other words, this function returns the bounds of the
+             entity in the entity's coordinate system.
+             </summary>
+             <returns>Local bounding rectangle of the entity</returns>
+        </member>
+        <member name="M:SFML.Graphics.Shape.GetGlobalBounds">
+             <summary>
+             Get the global bounding rectangle of the entity.
+            
+             The returned rectangle is in global coordinates, which means
+             that it takes in account the transformations (translation,
+             rotation, scale, ...) that are applied to the entity.
+             In other words, this function returns the bounds of the
+             sprite in the global 2D world's coordinate system.
+             </summary>
+             <returns>Global bounding rectangle of the entity</returns>
+        </member>
+        <member name="M:SFML.Graphics.Shape.Draw(SFML.Graphics.RenderTarget,SFML.Graphics.RenderStates)">
+             <summmary>
+             Draw the object to a render target
+            
+             This is a pure virtual function that has to be implemented
+             by the derived class to define how the drawable should be
+             drawn.
+             </summmary>
+             <param name="target">Render target to draw to</param>
+             <param name="states">Current render states</param>
+        </member>
+        <member name="M:SFML.Graphics.Shape.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:SFML.Graphics.Shape.#ctor(SFML.Graphics.Shape)">
+            <summary>
+            Construct the shape from another shape
+            </summary>
+            <param name="copy">Shape to copy</param>
+        </member>
+        <member name="M:SFML.Graphics.Shape.Update">
+             <summary>
+             Recompute the internal geometry of the shape.
+            
+             This function must be called by the derived class everytime
+             the shape's points change (ie. the result of either
+             PointCount or GetPoint is different).
              </summary>
         </member>
-        <member name="T:SFML.Graphics.Shader.CurrentTextureType">
+        <member name="M:SFML.Graphics.Shape.Destroy(System.Boolean)">
             <summary>
-            Special type that can be passed to SetParameter,
-            and that represents the texture of the object being drawn
+            Handle the destruction of the object
+            </summary>
+            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
+        </member>
+        <member name="M:SFML.Graphics.Shape.InternalGetPointCount(System.IntPtr)">
+            <summary>
+            Callback passed to the C API
+            </summary>
+        </member>
+        <member name="M:SFML.Graphics.Shape.InternalGetPoint(System.UInt32,System.IntPtr)">
+            <summary>
+            Callback passed to the C API
             </summary>
         </member>
         <member name="T:SFML.Graphics.Sprite">
@@ -2091,6 +2029,21 @@
             Construct the sprite from another sprite
             </summary>
             <param name="copy">Sprite to copy</param>
+        </member>
+        <member name="P:SFML.Graphics.Sprite.Color">
+            <summary>
+            Global color of the object
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Sprite.Texture">
+            <summary>
+            Source texture displayed by the sprite
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Sprite.TextureRect">
+            <summary>
+            Sub-rectangle of the source image displayed by the sprite
+            </summary>
         </member>
         <member name="M:SFML.Graphics.Sprite.GetLocalBounds">
              <summary>
@@ -2139,25 +2092,27 @@
             </summary>
             <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
         </member>
-        <member name="P:SFML.Graphics.Sprite.Color">
-            <summary>
-            Global color of the object
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Sprite.Texture">
-            <summary>
-            Source texture displayed by the sprite
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Sprite.TextureRect">
-            <summary>
-            Sub-rectangle of the source image displayed by the sprite
-            </summary>
-        </member>
         <member name="T:SFML.Graphics.Text">
             <summary>
             This class defines a graphical 2D text, that can be drawn on screen
             </summary>
+        </member>
+        <member name="T:SFML.Graphics.Text.Styles">
+            <summary>
+            Enumerate the string drawing styles
+            </summary>
+        </member>
+        <member name="F:SFML.Graphics.Text.Styles.Regular">
+            <summary>Regular characters, no style</summary>
+        </member>
+        <member name="F:SFML.Graphics.Text.Styles.Bold">
+            <summary> Characters are bold</summary>
+        </member>
+        <member name="F:SFML.Graphics.Text.Styles.Italic">
+            <summary>Characters are in italic</summary>
+        </member>
+        <member name="F:SFML.Graphics.Text.Styles.Underlined">
+            <summary>Characters are underlined</summary>
         </member>
         <member name="M:SFML.Graphics.Text.#ctor">
             <summary>
@@ -2184,6 +2139,31 @@
             Construct the text from another text
             </summary>
             <param name="copy">Text to copy</param>
+        </member>
+        <member name="P:SFML.Graphics.Text.Color">
+            <summary>
+            Global color of the object
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Text.DisplayedString">
+            <summary>
+            String which is displayed
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Text.Font">
+            <summary>
+            Font used to display the text
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Text.CharacterSize">
+            <summary>
+            Base size of characters
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Text.Style">
+            <summary>
+            Style of the text (see Styles enum)
+            </summary>
         </member>
         <member name="M:SFML.Graphics.Text.FindCharacterPos(System.UInt32)">
             <summary>
@@ -2241,48 +2221,6 @@
             </summary>
             <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
         </member>
-        <member name="P:SFML.Graphics.Text.Color">
-            <summary>
-            Global color of the object
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Text.DisplayedString">
-            <summary>
-            String which is displayed
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Text.Font">
-            <summary>
-            Font used to display the text
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Text.CharacterSize">
-            <summary>
-            Base size of characters
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Text.Style">
-            <summary>
-            Style of the text (see Styles enum)
-            </summary>
-        </member>
-        <member name="T:SFML.Graphics.Text.Styles">
-            <summary>
-            Enumerate the string drawing styles
-            </summary>
-        </member>
-        <member name="F:SFML.Graphics.Text.Styles.Regular">
-            <summary>Regular characters, no style</summary>
-        </member>
-        <member name="F:SFML.Graphics.Text.Styles.Bold">
-            <summary> Characters are bold</summary>
-        </member>
-        <member name="F:SFML.Graphics.Text.Styles.Italic">
-            <summary>Characters are in italic</summary>
-        </member>
-        <member name="F:SFML.Graphics.Text.Styles.Underlined">
-            <summary>Characters are underlined</summary>
-        </member>
         <member name="T:SFML.Graphics.Texture">
             <summary>
             Image living on the graphics card that can be used for drawing
@@ -2294,14 +2232,14 @@
             </summary>
             <param name="width">Texture width</param>
             <param name="height">Texture height</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Texture.#ctor(System.String)">
             <summary>
             Construct the texture from a file
             </summary>
             <param name="filename">Path of the image file to load</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Texture.#ctor(System.String,SFML.Graphics.IntRect)">
             <summary>
@@ -2309,14 +2247,14 @@
             </summary>
             <param name="filename">Path of the image file to load</param>
             <param name="area">Area of the image to load</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Texture.#ctor(System.IO.Stream)">
             <summary>
             Construct the texture from a file in a stream
             </summary>
             <param name="stream">Stream containing the file contents</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Texture.#ctor(System.IO.Stream,SFML.Graphics.IntRect)">
             <summary>
@@ -2324,14 +2262,14 @@
             </summary>
             <param name="stream">Stream containing the file contents</param>
             <param name="area">Area of the image to load</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Texture.#ctor(SFML.Graphics.Image)">
             <summary>
             Construct the texture from an image
             </summary>
             <param name="image">Image to load to the texture</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Texture.#ctor(SFML.Graphics.Image,SFML.Graphics.IntRect)">
             <summary>
@@ -2339,7 +2277,7 @@
             </summary>
             <param name="image">Image to load to the texture</param>
             <param name="area">Area of the image to load</param>
-            <exception cref="T:SFML.LoadingFailedException"/>
+            <exception cref="T:SFML.LoadingFailedException" />
         </member>
         <member name="M:SFML.Graphics.Texture.#ctor(SFML.Graphics.Texture)">
             <summary>
@@ -2411,11 +2349,31 @@
             <param name="x">X offset in the texture where to copy the source pixels</param>
             <param name="y">Y offset in the texture where to copy the source pixels</param>
         </member>
+        <member name="P:SFML.Graphics.Texture.Smooth">
+            <summary>
+            Control the smooth filter
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Texture.Repeated">
+            <summary>
+            Control the repeat mode
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Texture.Size">
+            <summary>
+            Size of the texture, in pixels
+            </summary>
+        </member>
         <member name="M:SFML.Graphics.Texture.Bind(SFML.Graphics.Texture)">
             <summary>
             Bind a texture for rendering
             </summary>
             <param name="texture">Shader to bind (can be null to use no texture)</param>
+        </member>
+        <member name="P:SFML.Graphics.Texture.MaximumSize">
+            <summary>
+            Maximum texture size allowed
+            </summary>
         </member>
         <member name="M:SFML.Graphics.Texture.ToString">
             <summary>
@@ -2434,26 +2392,6 @@
             Handle the destruction of the object
             </summary>
             <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        </member>
-        <member name="P:SFML.Graphics.Texture.Smooth">
-            <summary>
-            Control the smooth filter
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Texture.Repeated">
-            <summary>
-            Control the repeat mode
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Texture.Size">
-            <summary>
-            Size of the texture, in pixels
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.Texture.MaximumSize">
-            <summary>
-            Maximum texture size allowed
-            </summary>
         </member>
         <member name="T:SFML.Graphics.Transform">
             <summary>
@@ -2622,14 +2560,76 @@
             <param name="right">Right operand (the point to transform)</param>
             <returns>New transformed point</returns>
         </member>
+        <member name="P:SFML.Graphics.Transform.Identity">
+            <summary>The identity transform (does nothing)</summary>
+        </member>
         <member name="M:SFML.Graphics.Transform.ToString">
             <summary>
             Provide a string describing the object
             </summary>
             <returns>String description of the object</returns>
         </member>
-        <member name="P:SFML.Graphics.Transform.Identity">
-            <summary>The identity transform (does nothing)</summary>
+        <member name="T:SFML.Graphics.Transformable">
+            <summary>
+            Decomposed transform defined by a position, a rotation and a scale
+            </summary>
+        </member>
+        <member name="M:SFML.Graphics.Transformable.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:SFML.Graphics.Transformable.#ctor(SFML.Graphics.Transformable)">
+            <summary>
+            Construct the transformable from another transformable
+            </summary>
+            <param name="transformable">Transformable to copy</param>
+        </member>
+        <member name="P:SFML.Graphics.Transformable.Position">
+            <summary>
+            Position of the object
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Transformable.Rotation">
+            <summary>
+            Rotation of the object
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Transformable.Scale">
+            <summary>
+            Scale of the object
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Transformable.Origin">
+            <summary>
+            The origin of an object defines the center point for
+            all transformations (position, scale, rotation).
+            The coordinates of this point must be relative to the
+            top-left corner of the object, and ignore all
+            transformations (position, scale, rotation).
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Transformable.Transform">
+            <summary>
+            The combined transform of the object
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.Transformable.InverseTransform">
+            <summary>
+            The combined transform of the object
+            </summary>
+        </member>
+        <member name="M:SFML.Graphics.Transformable.#ctor(System.IntPtr)">
+            <summary>
+            Construct the object from its internal C pointer
+            </summary>
+            <param name="cPointer">Pointer to the object in the C library</param>
+        </member>
+        <member name="M:SFML.Graphics.Transformable.Destroy(System.Boolean)">
+            <summary>
+            Handle the destruction of the object
+            </summary>
+            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
         </member>
         <member name="T:SFML.Graphics.Vertex">
             <summary>
@@ -2711,6 +2711,22 @@
             </summary>
             <param name="copy">Transformable to copy</param>
         </member>
+        <member name="P:SFML.Graphics.VertexArray.VertexCount">
+            <summary>
+            Total vertex count
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.VertexArray.Item(System.UInt32)">
+             <summary>
+             Read-write access to vertices by their index.
+            
+             This function doesn't check index, it must be in range
+             [0, VertexCount - 1]. The behaviour is undefined
+             otherwise.
+             </summary>
+             <param name="index">Index of the vertex to get</param>
+             <returns>Reference to the index-th vertex</returns>
+        </member>
         <member name="M:SFML.Graphics.VertexArray.Clear">
             <summary>
             Clear the vertex array
@@ -2733,6 +2749,11 @@
             Add a vertex to the array
             </summary>
             <param name="vertex">Vertex to add</param>
+        </member>
+        <member name="P:SFML.Graphics.VertexArray.PrimitiveType">
+            <summary>
+            Type of primitives to draw
+            </summary>
         </member>
         <member name="M:SFML.Graphics.VertexArray.GetBounds">
              <summmary>
@@ -2759,27 +2780,6 @@
             Handle the destruction of the object
             </summary>
             <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        </member>
-        <member name="P:SFML.Graphics.VertexArray.VertexCount">
-            <summary>
-            Total vertex count
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.VertexArray.Item(System.UInt32)">
-             <summary>
-             Read-write access to vertices by their index.
-            
-             This function doesn't check index, it must be in range
-             [0, VertexCount - 1]. The behaviour is undefined
-             otherwise.
-             </summary>
-             <param name="index">Index of the vertex to get</param>
-             <returns>Reference to the index-th vertex</returns>
-        </member>
-        <member name="P:SFML.Graphics.VertexArray.PrimitiveType">
-            <summary>
-            Type of primitives to draw
-            </summary>
         </member>
         <member name="T:SFML.Graphics.View">
             <summary>
@@ -2810,6 +2810,27 @@
             Construct the view from another view
             </summary>
             <param name="copy">View to copy</param>
+        </member>
+        <member name="P:SFML.Graphics.View.Center">
+            <summary>
+            Center of the view
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.View.Size">
+            <summary>
+            Half-size of the view
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.View.Rotation">
+            <summary>
+            Rotation of the view, in degrees
+            </summary>
+        </member>
+        <member name="P:SFML.Graphics.View.Viewport">
+            <summary>
+            Target viewport of the view, defined as a factor of the
+            size of the target to which the view is applied
+            </summary>
         </member>
         <member name="M:SFML.Graphics.View.Reset(SFML.Graphics.FloatRect)">
             <summary>
@@ -2852,27 +2873,6 @@
             Handle the destruction of the object
             </summary>
             <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        </member>
-        <member name="P:SFML.Graphics.View.Center">
-            <summary>
-            Center of the view
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.View.Size">
-            <summary>
-            Half-size of the view
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.View.Rotation">
-            <summary>
-            Rotation of the view, in degrees
-            </summary>
-        </member>
-        <member name="P:SFML.Graphics.View.Viewport">
-            <summary>
-            Target viewport of the view, defined as a factor of the
-            size of the target to which the view is applied
-            </summary>
         </member>
     </members>
 </doc>

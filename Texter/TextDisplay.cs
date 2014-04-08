@@ -67,6 +67,7 @@ namespace Texter
             states.Transform *= Transform;
             states.Shader = _renderer;
 
+            Texture.Bind(null);
             target.Draw(_display, states);
         }
 

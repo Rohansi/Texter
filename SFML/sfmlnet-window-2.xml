@@ -493,6 +493,35 @@
         <member name="F:SFML.Window.Joystick.AxisCount">
             <summary>Maximum number of supported axes</summary>
         </member>
+        <member name="T:SFML.Window.Joystick.Axis">
+            <summary>
+            Axes supported by SFML joysticks
+            </summary>
+        </member>
+        <member name="F:SFML.Window.Joystick.Axis.X">
+            <summary>The X axis</summary>
+        </member>
+        <member name="F:SFML.Window.Joystick.Axis.Y">
+            <summary>The Y axis</summary>
+        </member>
+        <member name="F:SFML.Window.Joystick.Axis.Z">
+            <summary>The Z axis</summary>
+        </member>
+        <member name="F:SFML.Window.Joystick.Axis.R">
+            <summary>The R axis</summary>
+        </member>
+        <member name="F:SFML.Window.Joystick.Axis.U">
+            <summary>The U axis</summary>
+        </member>
+        <member name="F:SFML.Window.Joystick.Axis.V">
+            <summary>The V axis</summary>
+        </member>
+        <member name="F:SFML.Window.Joystick.Axis.PovX">
+            <summary>The X axis of the point-of-view hat</summary>
+        </member>
+        <member name="F:SFML.Window.Joystick.Axis.PovY">
+            <summary>TheY axis of the point-of-view hat</summary>
+        </member>
         <member name="M:SFML.Window.Joystick.IsConnected(System.UInt32)">
             <summary>
             Check if a joystick is connected
@@ -544,38 +573,14 @@
             call it if you have no window yet (or no window at all):
             in this case the joysticks states are not updated automatically.
         </member>
-        <member name="T:SFML.Window.Joystick.Axis">
-            <summary>
-            Axes supported by SFML joysticks
-            </summary>
-        </member>
-        <member name="F:SFML.Window.Joystick.Axis.X">
-            <summary>The X axis</summary>
-        </member>
-        <member name="F:SFML.Window.Joystick.Axis.Y">
-            <summary>The Y axis</summary>
-        </member>
-        <member name="F:SFML.Window.Joystick.Axis.Z">
-            <summary>The Z axis</summary>
-        </member>
-        <member name="F:SFML.Window.Joystick.Axis.R">
-            <summary>The R axis</summary>
-        </member>
-        <member name="F:SFML.Window.Joystick.Axis.U">
-            <summary>The U axis</summary>
-        </member>
-        <member name="F:SFML.Window.Joystick.Axis.V">
-            <summary>The V axis</summary>
-        </member>
-        <member name="F:SFML.Window.Joystick.Axis.PovX">
-            <summary>The X axis of the point-of-view hat</summary>
-        </member>
-        <member name="F:SFML.Window.Joystick.Axis.PovY">
-            <summary>TheY axis of the point-of-view hat</summary>
-        </member>
         <member name="T:SFML.Window.Keyboard">
             <summary>
             Give access to the real-time state of the keyboard
+            </summary>
+        </member>
+        <member name="T:SFML.Window.Keyboard.Key">
+            <summary>
+            Key codes
             </summary>
         </member>
         <member name="M:SFML.Window.Keyboard.IsKeyPressed(SFML.Window.Keyboard.Key)">
@@ -585,60 +590,33 @@
             <param name="key">Key to check</param>
             <returns>True if the key is pressed, false otherwise</returns>
         </member>
-        <member name="T:SFML.Window.Keyboard.Key">
-            <summary>
-            Key codes
-            </summary>
-        </member>
-        <member name="T:SFML.LoadingFailedException">
-            <summary>
-            Exception thrown by SFML whenever loading a resource fails
-            </summary>
-        </member>
-        <member name="M:SFML.LoadingFailedException.#ctor">
-            <summary>
-            Default constructor (unknown error)
-            </summary>
-        </member>
-        <member name="M:SFML.LoadingFailedException.#ctor(System.String)">
-            <summary>
-            Failure to load a resource from memory
-            </summary>
-            <param name="resourceName">Name of the resource</param>
-        </member>
-        <member name="M:SFML.LoadingFailedException.#ctor(System.String,System.Exception)">
-            <summary>
-            Failure to load a resource from memory
-            </summary>
-            <param name="resourceName">Name of the resource</param>
-            <param name="innerException">Exception which is the cause ofthe current exception</param>
-        </member>
-        <member name="M:SFML.LoadingFailedException.#ctor(System.String,System.String)">
-            <summary>
-            Failure to load a resource from a file
-            </summary>
-            <param name="resourceName">Name of the resource</param>
-            <param name="filename">Path of the file</param>
-        </member>
-        <member name="M:SFML.LoadingFailedException.#ctor(System.String,System.String,System.Exception)">
-            <summary>
-            Failure to load a resource from a file
-            </summary>
-            <param name="resourceName">Name of the resource</param>
-            <param name="filename">Path of the file</param>
-            <param name="innerException">Exception which is the cause ofthe current exception</param>
-        </member>
-        <member name="M:SFML.LoadingFailedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-            Initialize an instance of the exception with serialized data
-            </summary>
-            <param name="info">Serialized data</param>
-            <param name="context">Contextual informations</param>
-        </member>
         <member name="T:SFML.Window.Mouse">
             <summary>
             Give access to the real-time state of the mouse
             </summary>
+        </member>
+        <member name="T:SFML.Window.Mouse.Button">
+            <summary>
+            Mouse buttons
+            </summary>
+        </member>
+        <member name="F:SFML.Window.Mouse.Button.Left">
+            <summary>The left mouse button</summary>
+        </member>
+        <member name="F:SFML.Window.Mouse.Button.Right">
+            <summary>The right mouse button</summary>
+        </member>
+        <member name="F:SFML.Window.Mouse.Button.Middle">
+            <summary>The middle (wheel) mouse button</summary>
+        </member>
+        <member name="F:SFML.Window.Mouse.Button.XButton1">
+            <summary>The first extra mouse button</summary>
+        </member>
+        <member name="F:SFML.Window.Mouse.Button.XButton2">
+            <summary>The second extra mouse button</summary>
+        </member>
+        <member name="F:SFML.Window.Mouse.Button.ButtonCount">
+            <summary>Keep last -- the total number of mouse buttons</summary>
         </member>
         <member name="M:SFML.Window.Mouse.IsButtonPressed(SFML.Window.Mouse.Button)">
             <summary>
@@ -681,75 +659,6 @@
             <param name="position">New position of the mouse</param>
             <param name="relativeTo">Reference window</param>
         </member>
-        <member name="T:SFML.Window.Mouse.Button">
-            <summary>
-            Mouse buttons
-            </summary>
-        </member>
-        <member name="F:SFML.Window.Mouse.Button.Left">
-            <summary>The left mouse button</summary>
-        </member>
-        <member name="F:SFML.Window.Mouse.Button.Right">
-            <summary>The right mouse button</summary>
-        </member>
-        <member name="F:SFML.Window.Mouse.Button.Middle">
-            <summary>The middle (wheel) mouse button</summary>
-        </member>
-        <member name="F:SFML.Window.Mouse.Button.XButton1">
-            <summary>The first extra mouse button</summary>
-        </member>
-        <member name="F:SFML.Window.Mouse.Button.XButton2">
-            <summary>The second extra mouse button</summary>
-        </member>
-        <member name="F:SFML.Window.Mouse.Button.ButtonCount">
-            <summary>Keep last -- the total number of mouse buttons</summary>
-        </member>
-        <member name="T:SFML.ObjectBase">
-            <summary>
-            The ObjectBase class is an abstract base for every
-            SFML object. It's meant for internal use only
-            </summary>
-        </member>
-        <member name="M:SFML.ObjectBase.#ctor(System.IntPtr)">
-            <summary>
-            Construct the object from a pointer to the C library object
-            </summary>
-            <param name="cPointer">Internal pointer to the object in the C libraries</param>
-        </member>
-        <member name="M:SFML.ObjectBase.Finalize">
-            <summary>
-            Dispose the object
-            </summary>
-        </member>
-        <member name="M:SFML.ObjectBase.Dispose">
-            <summary>
-            Explicitely dispose the object
-            </summary>
-        </member>
-        <member name="M:SFML.ObjectBase.Dispose(System.Boolean)">
-            <summary>
-            Destroy the object
-            </summary>
-            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        </member>
-        <member name="M:SFML.ObjectBase.Destroy(System.Boolean)">
-            <summary>
-            Destroy the object (implementation is left to each derived class)
-            </summary>
-            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        </member>
-        <member name="M:SFML.ObjectBase.SetThis(System.IntPtr)">
-            <summary>
-            Set the pointer to the internal object. For internal use only
-            </summary>
-            <param name="cPointer">Pointer to the internal object in C library</param>
-        </member>
-        <member name="P:SFML.ObjectBase.CPointer">
-            <summary>
-            Access to the internal pointer of the object.
-            For internal use only
-            </summary>
-        </member>
         <member name="T:SFML.Window.InputStream">
             <summary>
             Structure that contains InputStream callbacks
@@ -770,6 +679,11 @@
         <member name="M:SFML.Window.StreamAdaptor.Finalize">
             <summary>
             Dispose the object
+            </summary>
+        </member>
+        <member name="P:SFML.Window.StreamAdaptor.InputStreamPtr">
+            <summary>
+            The pointer to the CSFML InputStream structure
             </summary>
         </member>
         <member name="M:SFML.Window.StreamAdaptor.Dispose">
@@ -813,11 +727,6 @@
             </summary>
             <param name="userData">User data -- unused</param>
             <returns>Number of bytes in the stream</returns>
-        </member>
-        <member name="P:SFML.Window.StreamAdaptor.InputStreamPtr">
-            <summary>
-            The pointer to the CSFML InputStream structure
-            </summary>
         </member>
         <member name="T:SFML.Window.Vector2f">
             <summary>
@@ -1104,6 +1013,16 @@
             </summary>
             <returns>True if the video mode is valid, false otherwise</returns>
         </member>
+        <member name="P:SFML.Window.VideoMode.FullscreenModes">
+            <summary>
+            Get the list of all the supported fullscreen video modes
+            </summary>
+        </member>
+        <member name="P:SFML.Window.VideoMode.DesktopMode">
+            <summary>
+            Get the current desktop video mode
+            </summary>
+        </member>
         <member name="M:SFML.Window.VideoMode.ToString">
             <summary>
             Provide a string describing the object
@@ -1118,16 +1037,6 @@
         </member>
         <member name="F:SFML.Window.VideoMode.BitsPerPixel">
             <summary>Video mode depth, in bits per pixel</summary>
-        </member>
-        <member name="P:SFML.Window.VideoMode.FullscreenModes">
-            <summary>
-            Get the list of all the supported fullscreen video modes
-            </summary>
-        </member>
-        <member name="P:SFML.Window.VideoMode.DesktopMode">
-            <summary>
-            Get the current desktop video mode
-            </summary>
         </member>
         <member name="T:SFML.Window.Styles">
             <summary>
@@ -1215,6 +1124,21 @@
             Display the window on screen
             </summary>
         </member>
+        <member name="P:SFML.Window.Window.Settings">
+            <summary>
+            Creation settings of the window
+            </summary>
+        </member>
+        <member name="P:SFML.Window.Window.Position">
+            <summary>
+            Position of the window
+            </summary>
+        </member>
+        <member name="P:SFML.Window.Window.Size">
+            <summary>
+            Size of the rendering region of the window
+            </summary>
+        </member>
         <member name="M:SFML.Window.Window.SetTitle(System.String)">
             <summary>
             Change the title of the window
@@ -1282,6 +1206,11 @@
             </summary>
             <param name="threshold">New threshold, in range [0, 100]</param>
         </member>
+        <member name="P:SFML.Window.Window.SystemHandle">
+            <summary>
+            OS-specific handle of the window
+            </summary>
+        </member>
         <member name="M:SFML.Window.Window.WaitAndDispatchEvents">
             <summary>
             Wait for a new event and dispatch it to the corresponding
@@ -1348,26 +1277,6 @@
             </summary>
             <param name="e">Event to dispatch</param>
         </member>
-        <member name="P:SFML.Window.Window.Settings">
-            <summary>
-            Creation settings of the window
-            </summary>
-        </member>
-        <member name="P:SFML.Window.Window.Position">
-            <summary>
-            Position of the window
-            </summary>
-        </member>
-        <member name="P:SFML.Window.Window.Size">
-            <summary>
-            Size of the rendering region of the window
-            </summary>
-        </member>
-        <member name="P:SFML.Window.Window.SystemHandle">
-            <summary>
-            OS-specific handle of the window
-            </summary>
-        </member>
         <member name="E:SFML.Window.Window.Closed">
             <summary>Event handler for the Closed event</summary>
         </member>
@@ -1421,6 +1330,97 @@
         </member>
         <member name="E:SFML.Window.Window.JoystickDisconnected">
             <summary>Event handler for the JoystickDisconnected event</summary>
+        </member>
+        <member name="T:SFML.LoadingFailedException">
+            <summary>
+            Exception thrown by SFML whenever loading a resource fails
+            </summary>
+        </member>
+        <member name="M:SFML.LoadingFailedException.#ctor">
+            <summary>
+            Default constructor (unknown error)
+            </summary>
+        </member>
+        <member name="M:SFML.LoadingFailedException.#ctor(System.String)">
+            <summary>
+            Failure to load a resource from memory
+            </summary>
+            <param name="resourceName">Name of the resource</param>
+        </member>
+        <member name="M:SFML.LoadingFailedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Failure to load a resource from memory
+            </summary>
+            <param name="resourceName">Name of the resource</param>
+            <param name="innerException">Exception which is the cause ofthe current exception</param>
+        </member>
+        <member name="M:SFML.LoadingFailedException.#ctor(System.String,System.String)">
+            <summary>
+            Failure to load a resource from a file
+            </summary>
+            <param name="resourceName">Name of the resource</param>
+            <param name="filename">Path of the file</param>
+        </member>
+        <member name="M:SFML.LoadingFailedException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Failure to load a resource from a file
+            </summary>
+            <param name="resourceName">Name of the resource</param>
+            <param name="filename">Path of the file</param>
+            <param name="innerException">Exception which is the cause ofthe current exception</param>
+        </member>
+        <member name="M:SFML.LoadingFailedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initialize an instance of the exception with serialized data
+            </summary>
+            <param name="info">Serialized data</param>
+            <param name="context">Contextual informations</param>
+        </member>
+        <member name="T:SFML.ObjectBase">
+            <summary>
+            The ObjectBase class is an abstract base for every
+            SFML object. It's meant for internal use only
+            </summary>
+        </member>
+        <member name="M:SFML.ObjectBase.#ctor(System.IntPtr)">
+            <summary>
+            Construct the object from a pointer to the C library object
+            </summary>
+            <param name="cPointer">Internal pointer to the object in the C libraries</param>
+        </member>
+        <member name="M:SFML.ObjectBase.Finalize">
+            <summary>
+            Dispose the object
+            </summary>
+        </member>
+        <member name="P:SFML.ObjectBase.CPointer">
+            <summary>
+            Access to the internal pointer of the object.
+            For internal use only
+            </summary>
+        </member>
+        <member name="M:SFML.ObjectBase.Dispose">
+            <summary>
+            Explicitely dispose the object
+            </summary>
+        </member>
+        <member name="M:SFML.ObjectBase.Dispose(System.Boolean)">
+            <summary>
+            Destroy the object
+            </summary>
+            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
+        </member>
+        <member name="M:SFML.ObjectBase.Destroy(System.Boolean)">
+            <summary>
+            Destroy the object (implementation is left to each derived class)
+            </summary>
+            <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
+        </member>
+        <member name="M:SFML.ObjectBase.SetThis(System.IntPtr)">
+            <summary>
+            Set the pointer to the internal object. For internal use only
+            </summary>
+            <param name="cPointer">Pointer to the internal object in C library</param>
         </member>
     </members>
 </doc>
