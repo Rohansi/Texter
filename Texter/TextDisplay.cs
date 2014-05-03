@@ -20,8 +20,6 @@ namespace Texter
         private VertexArray _display;
         private Shader _renderer;
 
-        private Color _color = new Color(0, 0, 0);
-
         public uint CharacterWidth { get; private set; }
         public uint CharacterHeight { get; private set; }
 
@@ -108,10 +106,8 @@ namespace Texter
                 }
             }
 
-            _color.R = (byte)glyph;
-            _color.G = (byte)fore;
-            _color.B = (byte)back;
-            _data.SetPixel((uint)x, (uint)y, _color);
+            var color = new Color((byte)glyph, (byte)fore, (byte)back);
+            _data.SetPixel((uint)x, (uint)y, color);
         }
 
         public Character Get(int x, int y)
