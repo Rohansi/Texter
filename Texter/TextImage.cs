@@ -8,6 +8,11 @@ namespace Texter
 
         private Character[,] _data;
 
+        /// <summary>
+        /// Constructs a text image.
+        /// </summary>
+        /// <param name="width">Width in characters</param>
+        /// <param name="height">Height in characters</param>
         public TextImage(uint width, uint height)
         {
             Width = width;

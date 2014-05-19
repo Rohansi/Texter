@@ -15,7 +15,7 @@ namespace Texter
         }
 
         /// <summary>
-        /// Access this renderer behind an effect.
+        /// Access this renderer behind an effect function.
         /// </summary>
         public static TextEffect Effect(this ITextRenderer renderer, TextEffect.Func effect)
         {
@@ -23,7 +23,7 @@ namespace Texter
         }
 
         /// <summary>
-        /// Clear the renderer to a character.
+        /// Clear this renderer to a character.
         /// </summary>
         public static void Clear(this ITextRenderer renderer, Character character, bool useBlending = false)
         {
@@ -37,7 +37,7 @@ namespace Texter
         }
 
         /// <summary>
-        /// Draw an renderer to this renderer.
+        /// Draw a renderer to this renderer.
         /// </summary>
         public static void DrawImage(this ITextRenderer renderer, int x, int y, ITextRenderer image)
         {

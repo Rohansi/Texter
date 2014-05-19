@@ -23,7 +23,15 @@ namespace Texter
         public uint CharacterWidth { get; private set; }
         public uint CharacterHeight { get; private set; }
 
-        public TextDisplay(uint width, uint height, string fontFile = "font.png", string paletteFile = "palette.png")
+        /// <summary>
+        /// Constructs a text display.
+        /// </summary>
+        /// <param name="width">Width in characters</param>
+        /// <param name="height">Height in characters</param>
+        /// <param name="fontFile">Font texture</param>
+        /// <param name="convertFont">Enable support for masked fonts</param>
+        /// <param name="paletteFile">Palette texture</param>
+        public TextDisplay(uint width, uint height, string fontFile = "font.png", bool convertFont = true, string paletteFile = "palette.png")
         {
             Width = width;
             Height = height;
@@ -33,28 +41,53 @@ namespace Texter
 
             var fontImage = new Image(Path.Combine(DataFolder, fontFile));
 
-            // use top left pixel as mask color
-            fontImage.CreateMaskFromColor(fontImage.GetPixel(0, 0));
+            CharacterWidth = fontImage.Size.X / 16;
+            CharacterHeight = fontImage.Size.Y / 16;
 
-            // gray to alpha transformation
-            for (uint y = 0; y < fontImage.Size.Y; y++)
+            if (convertFont)
             {
-                for (uint x = 0; x < fontImage.Size.X; x++)
+                var fontWidth = fontImage.Size.X;
+                var fontHeight = fontImage.Size.Y;
+                var fontPixels = fontImage.Pixels;
+
+                fontImage.Dispose();
+
+                // use top left pixel of space as mask color
+                var maskX = (32 % 16) * CharacterWidth;
+                var maskY = (32 / 16) * CharacterHeight * (fontWidth * 4);
+                var maskI = maskX + maskY;
+                var maskR = fontPixels[maskI + 0];
+                var maskG = fontPixels[maskI + 1];
+                var maskB = fontPixels[maskI + 2];
+                var maskA = fontPixels[maskI + 3];
+
+                for (int i = 0; i < fontPixels.Length; i += 4)
                 {
-                    var pixel = fontImage.GetPixel(x, y);
-                    var level = (pixel.R + pixel.G + pixel.B) / 3f;
-                    var alpha = pixel.A / 256f;
+                    var r = fontPixels[i + 0];
+                    var g = fontPixels[i + 1];
+                    var b = fontPixels[i + 2];
+                    var a = fontPixels[i + 3];
 
-                    pixel.A = (byte)(level * alpha);
+                    if (r == maskR && g == maskG && b == maskB && a == maskA)
+                    {
+                        // mask color, set to transparent
+                        fontPixels[i + 3] = 0;
+                    }
+                    else
+                    {
+                        // set alpha channel to average of rgb
+                        var level = (r + b + g) / 3f;
+                        var alpha = a / 256f;
 
-                    fontImage.SetPixel(x, y, pixel);
+                        fontPixels[i + 3] = (byte)(level * alpha);
+                    }
                 }
+
+                fontImage = new Image(fontWidth, fontHeight, fontPixels);
+                //fontImage.SaveToFile("result.png");
             }
 
             _fontTexture = new Texture(fontImage);
-
-            CharacterWidth = _fontTexture.Size.X / 16;
-            CharacterHeight = _fontTexture.Size.Y / 16;
 
             _palette = new Image(Path.Combine(DataFolder, paletteFile));
             _paletteTexture = new Texture(_palette);
@@ -139,11 +172,17 @@ namespace Texter
             return new Character(p.R, p.G, p.B);
         }
 
+        /// <summary>
+        /// Sets a color in the display's palette.
+        /// </summary>
         public void PaletteSet(byte index, Color color)
         {
             _palette.SetPixel(index, 0, color);
         }
 
+        /// <summary>
+        /// Gets a color from the display's palette.
+        /// </summary>
         public Color PaletteGet(byte index)
         {
             return _palette.GetPixel(index, 0);
