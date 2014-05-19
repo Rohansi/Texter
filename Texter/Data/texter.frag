@@ -3,7 +3,6 @@
 const vec2 charSize    = vec2(#W#, #H#); // Size of characters in the font texture
 const vec2 fontSizeC   = vec2(16, 16);   // Layout of characters
 const vec2 fontSize    = vec2(charSize.x * fontSizeC.x, charSize.y * fontSizeC.y);
-const vec3 eps         = vec3(0.005, 0.005, 0.005);
 
 uniform sampler2D   data;
 uniform vec2        dataSize;
@@ -33,11 +32,8 @@ void main() {
                        mod(floor(gl_TexCoord[0].y * (dataSize.y * charSize.y)), charSize.y));
     
     vec4 fnCol = texelGet(font, fontSize - 1.0, fnPos + offset);
+    vec4 fgCol = texelGet(palette, vec2(256.0, 1.0), vec2(floor(chData.g * 256.0), 0.0));
+    vec4 bgCol = texelGet(palette, vec2(256.0, 1.0), vec2(floor(chData.b * 256.0), 0.0));
 
-    if (all(greaterThanEqual(fnCol.rgb, vec3(1.0) - eps)))
-        gl_FragColor = texelGet(palette, vec2(256.0, 1.0), vec2(floor(chData.g * 256.0), 0.0));
-    else if (all(lessThanEqual(fnCol.rgb, eps)))
-        gl_FragColor = texelGet(palette, vec2(256.0, 1.0), vec2(floor(chData.b * 256.0), 0.0));
-    else
-        gl_FragColor = fnCol;
+    gl_FragColor = fnCol.a * fgCol + (1.0 - fnCol.a) * bgCol;
 }

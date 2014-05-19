@@ -31,7 +31,27 @@ namespace Texter
             _data = new Image(width, height, Color.Black);
             _dataTexture = new Texture(_data);
 
-            _fontTexture = new Texture(Path.Combine(DataFolder, fontFile));
+            var fontImage = new Image(Path.Combine(DataFolder, fontFile));
+
+            // use top left pixel as mask color
+            fontImage.CreateMaskFromColor(fontImage.GetPixel(0, 0));
+
+            // gray to alpha transformation
+            for (uint y = 0; y < fontImage.Size.Y; y++)
+            {
+                for (uint x = 0; x < fontImage.Size.X; x++)
+                {
+                    var pixel = fontImage.GetPixel(x, y);
+                    var level = (pixel.R + pixel.G + pixel.B) / 3f;
+                    var alpha = pixel.A / 256f;
+
+                    pixel.A = (byte)(level * alpha);
+
+                    fontImage.SetPixel(x, y, pixel);
+                }
+            }
+
+            _fontTexture = new Texture(fontImage);
 
             CharacterWidth = _fontTexture.Size.X / 16;
             CharacterHeight = _fontTexture.Size.Y / 16;
