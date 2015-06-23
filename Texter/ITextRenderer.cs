@@ -1,5 +1,4 @@
-﻿
-namespace Texter
+﻿namespace Texter
 {
     public interface ITextRenderer
     {

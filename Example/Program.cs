@@ -1,9 +1,8 @@
-﻿
-namespace Example
+﻿namespace Example
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             new Example().Run();
         }

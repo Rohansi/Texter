@@ -1,6 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using SFML.Graphics;
-using SFML.Window;
+using SFML.System;
 
 namespace Texter
 {
@@ -33,6 +34,12 @@ namespace Texter
         /// <param name="paletteFile">Palette texture</param>
         public TextDisplay(uint width, uint height, string fontFile = "font.png", bool convertFont = true, string paletteFile = "palette.png")
         {
+            if (string.IsNullOrEmpty(fontFile))
+                throw new ArgumentNullException("fontFile");
+
+            if (string.IsNullOrEmpty(paletteFile))
+                throw new ArgumentNullException("paletteFile");
+                
             Width = width;
             Height = height;
 
@@ -127,15 +134,15 @@ namespace Texter
             if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return;
 
-            int glyph = character.Glyph;
-            int fore = character.Foreground;
-            int back = character.Background;
+            var glyph = character.Glyph;
+            var fore = character.Foreground;
+            var back = character.Background;
 
             if (character.HasTransparentComponent)
             {
                 if (useBlending)
                 {
-                    Character ch = Get(x, y);
+                    var ch = Get(x, y);
 
                     if (glyph == -1)
                         glyph = ch.Glyph;

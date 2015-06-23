@@ -40,6 +40,9 @@
     <Reference Include="sfmlnet-graphics-2">
       <HintPath>..\SFML\sfmlnet-graphics-2.dll</HintPath>
     </Reference>
+    <Reference Include="sfmlnet-system-2">
+      <HintPath>..\SFML\sfmlnet-system-2.dll</HintPath>
+    </Reference>
     <Reference Include="sfmlnet-window-2">
       <HintPath>..\SFML\sfmlnet-window-2.dll</HintPath>
     </Reference>
@@ -52,7 +55,7 @@
     <Compile Include="TextExtensions.cs" />
     <Compile Include="TextImage.cs" />
     <Compile Include="TextRegion.cs" />
-    <Compile Include="TextRenderer.cs" />
+    <Compile Include="ITextRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\font.png">

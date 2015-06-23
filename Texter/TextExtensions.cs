@@ -1,5 +1,4 @@
-﻿
-namespace Texter
+﻿namespace Texter
 {
     public static class TextExtensions
     {
@@ -27,9 +26,9 @@ namespace Texter
         /// </summary>
         public static void Clear(this ITextRenderer renderer, Character character, bool useBlending = false)
         {
-            for (int y = 0; y < renderer.Height; y++)
+            for (var y = 0; y < renderer.Height; y++)
             {
-                for (int x = 0; x < renderer.Width; x++)
+                for (var x = 0; x < renderer.Width; x++)
                 {
                     renderer.Set(x, y, character, useBlending);
                 }
@@ -44,9 +43,9 @@ namespace Texter
             if (x < -image.Width || x > renderer.Width || y < -image.Height || y > renderer.Height)
                 return;
 
-            for (int yy = 0; yy < image.Height; yy++)
+            for (var yy = 0; yy < image.Height; yy++)
             {
-                for (int xx = 0; xx < image.Width; xx++)
+                for (var xx = 0; xx < image.Width; xx++)
                 {
                     renderer.Set(x + xx, y + yy, image.Get(xx, yy));
                 }
@@ -61,9 +60,9 @@ namespace Texter
             if (x < -width || x > renderer.Width || y < -height || y > renderer.Height)
                 return;
 
-            for (int yy = 0; yy < height; yy++)
+            for (var yy = 0; yy < height; yy++)
             {
-                for (int xx = 0; xx < width; xx++)
+                for (var xx = 0; xx < width; xx++)
                 {
                     renderer.Set(x + xx, y + yy, image.Get((int)startX + xx, (int)startY + yy));
                 }
@@ -75,7 +74,7 @@ namespace Texter
         /// </summary>
         public static void DrawText(this ITextRenderer renderer, int x, int y, string text, Character color)
         {
-            foreach (char c in text)
+            foreach (var c in text)
             {
                 renderer.Set(x, y, new Character(c, color.Foreground, color.Background));
                 x++;

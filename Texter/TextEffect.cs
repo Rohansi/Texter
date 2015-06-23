@@ -14,11 +14,14 @@ namespace Texter
 
         internal TextEffect(ITextRenderer renderer, Func effect)
         {
+            if (renderer == null)
+                throw new ArgumentNullException("renderer");
+
+            if (effect == null)
+                throw new ArgumentNullException("effect");
+
             _renderer = renderer;
             _effect = effect;
-
-            if (_effect == null)
-                throw new ArgumentNullException("effect");
 
             Width = _renderer.Width;
             Height = _renderer.Height;
@@ -31,11 +34,11 @@ namespace Texter
 
             if (useBlending && character.HasTransparentComponent)
             {
-                int glyph = character.Glyph;
-                int fore = character.Foreground;
-                int back = character.Background;
+                var glyph = character.Glyph;
+                var fore = character.Foreground;
+                var back = character.Background;
 
-                Character ch = Get(x, y);
+                var ch = Get(x, y);
 
                 if (glyph == -1)
                     glyph = ch.Glyph;

@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace Texter
 {
     public class TextRegion : ITextRenderer
@@ -12,6 +13,9 @@ namespace Texter
 
         internal TextRegion(ITextRenderer renderer, int x, int y, uint w, uint h)
         {
+            if (renderer == null)
+                throw new ArgumentNullException("renderer");
+
             _renderer = renderer;
             _startX = x;
             _startY = y;

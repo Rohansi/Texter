@@ -1,5 +1,4 @@
-﻿
-namespace Texter
+﻿namespace Texter
 {
     public class TextImage : ITextRenderer
     {
@@ -29,11 +28,11 @@ namespace Texter
 
             if (useBlending && character.HasTransparentComponent)
             {
-                int glyph = character.Glyph;
-                int fore = character.Foreground;
-                int back = character.Background;
+                var glyph = character.Glyph;
+                var fore = character.Foreground;
+                var back = character.Background;
 
-                Character ch = Get(x, y);
+                var ch = Get(x, y);
 
                 if (glyph == -1)
                     glyph = ch.Glyph;

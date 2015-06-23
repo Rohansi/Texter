@@ -29,7 +29,7 @@ namespace Example
             double time = 0;
             var random = new Random();
 
-            while (_window.IsOpen())
+            while (_window.IsOpen)
             {
                 // Normal SFML stuff
                 _window.DispatchEvents();
@@ -42,15 +42,15 @@ namespace Example
                 var region = _example.Region(1, 1, Width - 2, Height - 2);
 
                 // Render our fractal, I think I got this code from Wikipedia and added zooming
-                for (int y = 0; y < Height; y++)
+                for (var y = 0; y < Height; y++)
                 {
-                    for (int x = 0; x < Width; x++)
+                    for (var x = 0; x < Width; x++)
                     {
-                        double posX = (double)x / Width;
-                        double posY = (double)y / Height;
+                        var posX = (double)x / Width;
+                        var posY = (double)y / Height;
 
-                        double x0 = (posX * 3.5) - 2.5;
-                        double y0 = (posY * 2.0) - 1;
+                        var x0 = (posX * 3.5) - 2.5;
+                        var y0 = (posY * 2.0) - 1;
 
                         // Zooming
                         x0 /= 1.5f + Math.Sin(time) * 0.5f;
@@ -60,19 +60,19 @@ namespace Example
                         double yy = 0;
 
                         const int maxIteration = 24;
-                        int iteration = 0;
+                        var iteration = 0;
 
                         while (xx * xx + yy * yy < 2 * 2 && iteration < maxIteration)
                         {
-                            double xtemp = xx * xx - yy * yy + x0;
+                            var xtemp = xx * xx - yy * yy + x0;
                             yy = 2 * xx * yy + y0;
                             xx = xtemp;
 
                             iteration++;
                         }
 
-                        double colorPercentage = (double)iteration / maxIteration;
-                        byte color = (byte)(colorPercentage * 255);
+                        var colorPercentage = (double)iteration / maxIteration;
+                        var color = (byte)(colorPercentage * 255);
 
                         // Modifying the TextDisplay per Character, through a region
                         region.Set(x, y, new Character(random.Next(255), color - 128, color));
