@@ -26,7 +26,7 @@ namespace Texter
 
         public void Set(int x, int y, Character character, bool useBlending = true)
         {
-            if (x < 0 || x > Width - 1 | y < 0 | y > Height - 1)
+            if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return;
 
             _renderer.Set(_startX + x, _startY + y, character, useBlending);
@@ -34,7 +34,7 @@ namespace Texter
 
         public Character Get(int x, int y)
         {
-            if (x < 0 || x > Width - 1 | y < 0 | y > Height - 1)
+            if (x < 0 || x > Width - 1 || y < 0 || y > Height - 1)
                 return Character.Blank;
 
             return _renderer.Get(_startX + x, _startY + y);
